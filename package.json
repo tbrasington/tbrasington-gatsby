@@ -1,0 +1,36 @@
+{
+  "name": "tbrasington-site",
+  "description": "tbrasingotn site",
+  "version": "1.0.0",
+  "author": "Thomas Brasington",
+  "dependencies": {
+    "gatsby": "^1.9.63",
+    "gatsby-link": "^1.6.21",
+    "gatsby-plugin-react-helmet": "^1.0.5",
+    "gatsby-plugin-sass": "^1.0.12",
+    "gatsby-plugin-sharp": "^1.6.18",
+    "gatsby-remark-images": "^1.5.18",
+    "gatsby-source-filesystem": "^1.5.5",
+    "gatsby-transformer-remark": "^1.7.17",
+    "react-load-script": "0.0.6",
+    "gatsby-transformer-sharp": "^1.6.13"
+  },
+  "keywords": ["gatsby"],
+  "license": "MIT",
+  "main": "n/a",
+  "scripts": {
+    "build": "npm run build:cms && npm run build:site",
+    "build:site": "gatsby build",
+    "build:cms": "cd cms && yarn && npm run build",
+    "develop": "gatsby develop",
+    "serve": "gatsby serve",
+    "_format": "prettier --trailing-comma es5 --no-semi --single-quote --write",
+    "format": "npm run format:src & npm run format:cms",
+    "format:src": "npm run _format 'src/**/*.js'",
+    "format:cms": "npm run _format 'cms/**/*.js'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "prettier": "^1.7.4"
+  }
+}
