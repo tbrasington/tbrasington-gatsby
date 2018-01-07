@@ -1,79 +1,158 @@
-const path = require('path');
+const path = require(`path`)
+const _ = require("lodash");
+const webpackLodashPlugin = require("lodash-webpack-plugin");
+const { createFilePath } = require(`gatsby-source-filesystem`)
 
-exports.createPages = ({ boundActionCreators, graphql }) => {
-  const { createPage } = boundActionCreators;
 
-  return graphql(`
-    {
-      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, limit: 1000) {
-        edges {
-          node {
-            excerpt(pruneLength: 400)
-            html
-            id
-            frontmatter {
-              templateKey
-              path
-              date
-              title
-              image
-              heading
-              description
-              intro {
-                blurbs {
-                  image
-                  text
-                }
-                heading
-                description
-              }
-              main {
-                heading
-                description
-                image1 {
-                  alt
-                  image
-                }
-                image2 {
-                  alt
-                  image
-                }
-                image3 {
-                  alt
-                  image
-                }
-              }
-              testimonials {
-                author
-                quote
-              }
-              full_image
-              pricing {
-                heading
-                description
-                plans {
-                  description
-                  items
-                  plan
-                  price
-                }
+exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
+
+    const { createNodeField } = boundActionCreators    
+    // const tagPages = new Set();
+    // const categoryPages = new Set();
+    // const writingPage = new Set();
+    // const  writingIndex = new Set();
+    // const genericPages = new Set();
+    if (node.internal.type === `MarkdownRemark`) {
+
+        if(node.frontmatter.templateKey==="blog-entry") {
+            // writingPage.add(node);
+            const slug = createFilePath({ node, getNode, basePath: `pages` })
+            createNodeField({
+                node,
+                name: `slug`,
+                value: (node.frontmatter.path ? node.frontmatter.path : `/blog/${slug}`),
+            });
+        }
+
+        if(node.frontmatter.templateKey==="generic-page") {
+            // writingPage.add(node);
+            const slug = createFilePath({ node, getNode, basePath: `pages` })
+            createNodeField({
+                node,
+                name: `slug`,
+                value: (node.frontmatter.path ? node.frontmatter.path : slug),
+            });
+        }
+ 
+    }
+}
+
+exports.createPages = ({  graphql, boundActionCreators }) => {
+    const { createPage } = boundActionCreators
+ 
+    return new Promise((resolve, reject) => {
+      graphql(`
+      {
+        allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___templateKey] }, limit: 1000) {
+
+          edges {
+            node {
+            frontmatter { 
+                title
+                tags
+                category
+                templateKey
+            }
+              fields {
+                slug
               }
             }
           }
         }
-      }
-    }
-  `).then(result => {
-    if (result.errors) {
-      result.errors.forEach(e => console.error(e.toString()));
-      return Promise.reject(result.errors);
-    }
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-      createPage({
-        path: node.frontmatter.path,
-        component: path.resolve(`src/templates/${String(node.frontmatter.templateKey)}.js`),
-        context: {} // additional data can be passed via context
-      });
+      }      
+      `).then(result => {
+       
+        if (result.errors) {
+            result.errors.forEach(e => console.error(e.toString()));
+            return Promise.reject(result.errors);
+         }
+
+       // do we have tags 
+        const entriesSet = new Set();
+        const tagSet = new Set();
+        const categorySet = new Set();
+        const dataSet = result.data.allMarkdownRemark.edges;
+        
+        dataSet.map(({ node },index) => {
+
+            console.log(node)
+            if(node.frontmatter.templateKey==='blog-entry') {
+
+                entriesSet.add(node);
+                
+                if (node.frontmatter.tags) {
+                    node.frontmatter.tags.forEach(tag => {
+                    tagSet.add(tag);
+                    });
+                }
+
+                if (node.frontmatter.category) {
+                    categorySet.add(node.frontmatter.category);
+                } 
+            }
+            if(node.frontmatter.templateKet==='generic-text') {
+                createPage({
+                    path: node.fields.slug,
+                    component: path.resolve(`src/templates/generic-text.js`),
+                    context: {
+                        // Data passed to context is available in page queries as GraphQL variables.
+                        slug: node.fields.slug,
+                    },
+                });
+            }
+           
+        });
+        
+
+        const entriesList = Array.from(entriesSet);
+
+        entriesList.forEach((entry,index) => {
+           
+            const prev = index === 0 ? null : entriesList[index - 1];
+            const next = index === entriesList.length - 1 ? null : entriesList[index + 1];
+ 
+            createPage({
+                path: entry.fields.slug,
+                component: path.resolve(`src/templates/blog-entry.js`),
+                context: {
+                    slug: entry.fields.slug,
+                    next,
+                    prev
+                }
+            });
+        });
+
+        const tagList = Array.from(tagSet);
+
+        tagList.forEach(tag => {
+            const tagSlug  = `/tags/${_.camelCase(tag)}/`;
+            createPage({
+                path: tagSlug,
+                component: path.resolve(`src/templates/tags.js`),
+                context: {
+                    tag
+                }
+            });
+        });
+        
+        const categoryList = Array.from(categorySet);
+        categoryList.forEach(category => {
+            createPage({
+                path: `/category/${_.camelCase(category)}/`,
+                component: path.resolve(`src/templates/category.js`),
+                context: {
+                    category
+                }
+            });
+        });
+        //
+        resolve()
+      })
     });
-  });
-};
+  }
+
+  exports.modifyWebpackConfig = ({ config, stage }) => {
+    if (stage === "build-javascript") {
+      config.plugin("Lodash", webpackLodashPlugin, null);
+    }
+  };
