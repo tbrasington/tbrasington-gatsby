@@ -30,3 +30,18 @@ collections:
           - {label: "Path", name: "path", widget: "hidden", default: "/about"}
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "navbar"
+    label: "Navigation Bar"
+    files:
+      - file: "src/pages/structure.md"
+        label: "About"
+        name: "about"
+        fields:
+        - {label: "Content Type", name: "contentType", widget: "hidden", default: "navigationStructure"}
+        - name: links
+          label: Links
+          widget: list
+          fields:
+              - {label: Label, name: label, widget: string}
+              - {label: URL, name: url, widget: string}

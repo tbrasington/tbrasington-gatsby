@@ -14,6 +14,7 @@
     "gatsby-source-filesystem": "^1.5.5",
     "gatsby-transformer-remark": "^1.7.17",
     "gatsby-transformer-sharp": "^1.6.13",
+    "modularscale-js": "^3.0.1",
     "react-load-script": "0.0.6",
     "react-transition-group": "^2.2.1",
     "styled-components": "^2.4.0"
