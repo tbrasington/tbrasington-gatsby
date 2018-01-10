@@ -1,27 +1,35 @@
 import React from 'react';
+import { connect } from "react-redux"
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 import Helmet from 'react-helmet'; 
 import styled from 'styled-components';
 
-import {colours,breakpoints,spacing,getTransitionStyle} from '../DesignSystem';
+import {colours,breakpoints,typeStyles,spacing,getTransitionStyle} from '../DesignSystem';
 
 import Navigation from '../components/Navigation';
 
+const mapStateToProps = ({ menuOpen }) => {
+  return { menuOpen }
+}
+
+const mapDispatchToProps = dispatch => {
+  return { closeMenu: () => dispatch({ type: `CLOSEMENU`  }) }
+}
 
 class TemplateWrapper extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      menuOpen :true, 
       exiting: false
     }
+
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.location.key !== nextProps.location.key) {
-      this.setState({ menuOpen: false })
+      this.props.closeMenu()
     }
   }
   componentDidUpdate(){
@@ -35,7 +43,7 @@ class TemplateWrapper extends React.Component {
     const navigationItems = this.props.data.markdownRemark.frontmatter.links
 
     return (
-        <Container menuOpen={this.state.menuOpen} transitioning={this.state.exiting}>
+        <Container menuOpen={this.props.menuOpen} transitioning={this.state.exiting}>
           <Helmet title="Thomas Brasington">
           <script type="text/javascript">{`
           (function(d) {
@@ -54,8 +62,9 @@ class TemplateWrapper extends React.Component {
             `}
           </style>
           </Helmet>
-          <NavigationContainer menuOpen={this.state.menuOpen} ><Navigation items={navigationItems}/></NavigationContainer>
-          <PageContainer menuOpen={this.state.menuOpen}  transitioning={this.state.exiting}>{children()}</PageContainer>
+          <Logo><Link to="/">tbrasington</Link></Logo>
+          <NavigationContainer menuOpen={this.props.menuOpen} ><Navigation items={navigationItems}/></NavigationContainer>
+          <PageContainer menuOpen={this.props.menuOpen}  transitioning={this.state.exiting}>{children()}</PageContainer>
         </Container>
       )
     }
@@ -66,6 +75,27 @@ background : ${colours.black};
 min-height:100vh;
 position:relative;
 `
+
+const Logo = styled.div`
+position:relative;
+z-index:3;
+padding-top: ${spacing * 2}px;
+padding-left: ${spacing * 2}px;
+color:${colours.white};
+${typeStyles.heading5.bp1};
+@media (min-width: ${breakpoints.bp3}px) {
+  padding-top: ${spacing * 6}px;
+    padding-left: ${spacing * 6}px;
+    ${typeStyles.heading5.bp3};
+}
+
+a {
+    color:${colours.white};
+    text-decoration:none;
+}
+
+`
+
 const NavigationContainer = styled.div`
 position:absolute;
 top:0;
@@ -114,4 +144,4 @@ TemplateWrapper.propTypes = {
   children: PropTypes.func
 };
 
-export default TemplateWrapper;
+export default connect(mapStateToProps, mapDispatchToProps)(TemplateWrapper);

@@ -1,5 +1,5 @@
 ---
-templateKey: generic-page
+templateKey: about-page
 path: /about
 title: About
 ---

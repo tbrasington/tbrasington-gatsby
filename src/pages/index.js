@@ -3,8 +3,8 @@ import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 import Script from 'react-load-script';
 import styled from 'styled-components'
-import Content, { HTMLContent } from '../components/Content';
- 
+import {colours,breakpoints,typeStyles,spacing,gridSettings} from '../DesignSystem';
+
 
 export default class IndexPage extends React.Component {
   handleScriptLoad() {
@@ -28,16 +28,20 @@ export default class IndexPage extends React.Component {
           url="https://identity.netlify.com/v1/netlify-identity-widget.js"
           onLoad={this.handleScriptLoad.bind(this)}
         />
-        <HTMLContent content = {data.markdownRemark.html}/>
+        
+        <About dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
 
-        <Link to="/blog/getting-started-with-react-sketchapp">blog</Link>
       </Container>
     );
   }
 }
 
+
 const Container = styled.div`
-position:relative;
+${gridSettings.initGrid.bp1};
+`
+
+const About = styled.div`
 `
 
 

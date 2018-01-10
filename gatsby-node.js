@@ -24,7 +24,7 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
             });
         }
 
-        if(node.frontmatter.templateKey==="generic-page") {
+        if(node.frontmatter.templateKey==="about-page") {
             // writingPage.add(node);
             const slug = createFilePath({ node, getNode, basePath: `pages` })
             createNodeField({
@@ -75,7 +75,6 @@ exports.createPages = ({  graphql, boundActionCreators }) => {
         
         dataSet.map(({ node },index) => {
 
-            console.log(node)
             if(node.frontmatter.templateKey==='blog-entry') {
 
                 entriesSet.add(node);
@@ -90,10 +89,12 @@ exports.createPages = ({  graphql, boundActionCreators }) => {
                     categorySet.add(node.frontmatter.category);
                 } 
             }
-            if(node.frontmatter.templateKet==='generic-text') {
+            if(node.frontmatter.templateKey==='about-page') {
+
+                console.log('aboutpage')
                 createPage({
                     path: node.fields.slug,
-                    component: path.resolve(`src/templates/generic-text.js`),
+                    component: path.resolve(`src/templates/about-page.js`),
                     context: {
                         // Data passed to context is available in page queries as GraphQL variables.
                         slug: node.fields.slug,

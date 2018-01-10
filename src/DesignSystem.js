@@ -1,8 +1,28 @@
 import ms from 'modularscale-js';
+import {css} from 'styled-components';
 
 export const breakpoints = {
   bp1 : 320,
   bp3 : 1024
+}
+
+export const gridSettings = {
+initGrid : {
+  bp1 : 
+    css`
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      max-width:1440px;
+      margin:auto;
+    `,
+    bp3 : 
+    css`
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      max-width:1440px;
+      margin:auto;
+    `,
+  }
 }
 
 export const spacing = 8;
@@ -12,29 +32,6 @@ export const colours = {
     grey : '#F6F6F6',
     blue : '#0080FF',
     white : '#fff'
-}
-
-function  msSettings(value){
-  return ms(value,{
-    base: [16],
-    ratio: 1.25
-  })
-} 
-
-export const typeStyles = {
-  menu : {
-    bp1 : {
-      fontFamily:'aktiv-grotesk-extended',
-      fontSize :`${msSettings(3)}px`,
-      letterSpacing : `0.1em`,
-
-    },
-    bp3 : {
-      fontFamily:'aktiv-grotesk-extended',
-      fontSize :`${msSettings(6)}px`,
-      letterSpacing : `0.1em`,
-    }
-  }
 }
 
 const timings = {
@@ -65,4 +62,54 @@ const getTransitionStyles = (timing) => {
   
  export const getTransitionStyle = ({ timing, type }) =>{
     return getTransitionStyles(timings[timing])[type]
+}
+
+
+function  msSettings(value){
+  return ms(value,{
+    base: [16],
+    ratio: 1.25
+  })
+} 
+
+export const typeStyles = {
+  heading4 : {
+    bp1 : {
+      fontFamily:'aktiv-grotesk-extended',
+      fontSize :`${msSettings(3)}px`,
+      letterSpacing : `0.05em`,
+
+    },
+    bp3 : {
+      fontFamily:'aktiv-grotesk-extended',
+      fontSize :`${msSettings(6)}px`,
+      letterSpacing : `0.05em`,
+    }
+  },
+  heading5 : {
+    bp1 : {
+      fontFamily:'aktiv-grotesk-extended',
+      fontSize :`${msSettings(0.5)}px`,
+      letterSpacing : `0.01em`,
+
+    },
+    bp3 : {
+      fontFamily:'aktiv-grotesk-extended',
+      fontSize :`${msSettings(2)}px`,
+      letterSpacing : `0.01em`,
+    }
+  },
+  paragraph1 : {
+    bp1 : {
+      fontFamily:'aktiv-grotesk-extended',
+      fontSize :`${msSettings(2)}px`,
+      letterSpacing : `0.01em`,
+
+    },
+    bp3 : {
+      fontFamily:'aktiv-grotesk-extended',
+      fontSize :`${msSettings(3)}px`,
+      letterSpacing : `0.01em`,
+    }
+  }
 }
