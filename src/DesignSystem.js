@@ -13,16 +13,27 @@ initGrid : {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       max-width:1440px;
+      width:100%;
       margin:auto;
     `,
     bp3 : 
     css`
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      max-width:1440px;
-      margin:auto;
     `,
-  }
+  },
+  standardGrid : {
+    bp1 : 
+      css`
+      grid-column-start: 2;
+      grid-column-end:6;
+      `,
+      bp3 : 
+      css`
+      grid-column-start: 2;
+      grid-column-end:12;
+      `,
+    }
 }
 
 export const spacing = 8;

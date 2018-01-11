@@ -112,11 +112,15 @@ padding-left: ${spacing * 2}px;
 }
 `
 const PageContainer = NavigationContainer.extend`
+padding:0;
 z-index:2;
 background: ${colours.grey};
 transform-origin: 150%;
 transform: scale(${props=> props.menuOpen ? 0.5 : 1 });
 ${getTransitionStyle({type : 'menuScale', timing : 't3' })}
+@media (min-width: ${breakpoints.bp3}px) {
+  padding:0;
+}
 ${props=> console.log(props)}
 `
 
