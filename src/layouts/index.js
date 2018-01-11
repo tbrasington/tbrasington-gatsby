@@ -76,6 +76,7 @@ const Container = styled.div`
 background : ${colours.black};
 min-height:100vh;
 position:relative;
+overflow:${props=> props.menuOpen  ? 'hidden' : 'none' };
 `
 
 const Logo = styled.div`
@@ -119,6 +120,7 @@ z-index:2;
 background: ${colours.grey};
 transform-origin: 150%;
 transform: scale(${props=> props.menuOpen ? 0.5 : 1 });
+height:${props=> props.menuOpen  ? '60vh' : 'auto' };
 ${getTransitionStyle({type : 'menuScale', timing : 't3', delay : 't0' })}
 @media (min-width: ${breakpoints.bp3}px) {
   padding:0;
@@ -127,7 +129,7 @@ ${props=> console.log(props)}
 `
 
 const MenuBarContainer = styled.div`
-position:absolute;
+position:fixed;
 bottom:0;
 left:0;
 width:100%;
