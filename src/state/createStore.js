@@ -4,17 +4,19 @@ const reducer = (state, action) => {
   if (action.type === `CLOSEMENU`) {
     return Object.assign({}, state, {
       menuOpen: false,
+      theme : 'light' //light || dark
     })
   }
   if (action.type === `OPENMENU`) {
     return Object.assign({}, state, {
       menuOpen: true,
+      theme : 'dark' //light || dark
     })
   }
   return state
 }
 
-const initialState = { menuOpen: true }
+const initialState = { menuOpen: true, theme : 'dark' }
 
 const createStore = () => reduxCreateStore(reducer, initialState)
 export default createStore

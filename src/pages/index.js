@@ -38,7 +38,11 @@ export default class IndexPage extends React.Component {
 
 
 const Container = styled.div`
-${gridSettings.initGrid.bp1};
+  ${gridSettings.initGrid.bp1};
+
+  padding-left: ${spacing*3}px;
+  padding-right: ${spacing*3}px;
+
   @media (min-width: ${breakpoints.bp3}px) {
     ${gridSettings.initGrid.bp3};
   }
@@ -49,7 +53,7 @@ ${gridSettings.standardGrid.bp1};
 ${typeStyles.paragraph1.bp1};
 @media (min-width: ${breakpoints.bp3}px) {
     ${gridSettings.standardGrid.bp3};
-  ${typeStyles.paragraph1.bp3};
+    ${typeStyles.paragraph1.bp3};
   }
 `
 

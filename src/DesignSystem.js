@@ -6,6 +6,8 @@ export const breakpoints = {
   bp3 : 1024
 }
 
+export const spacing = 8;
+
 export const gridSettings = {
 initGrid : {
   bp1 : 
@@ -25,18 +27,18 @@ initGrid : {
   standardGrid : {
     bp1 : 
       css`
-      grid-column-start: 2;
-      grid-column-end:6;
+      grid-column-start: 1;
+      grid-column-end:7;
       `,
       bp3 : 
       css`
       grid-column-start: 2;
       grid-column-end:12;
+
       `,
     }
 }
 
-export const spacing = 8;
 
 export const colours = {
     black : '#000000',
@@ -46,33 +48,26 @@ export const colours = {
 }
 
 const timings = {
+  t0 : 0,
   t1 : 100,
   t2 : 200,
   t3 : 300,
   t4 : 400,
   t5 : 500
 }
-const getTransitionStyles = (timing) => {
+const getTransitionStyles = (timing,delay) => {
     return {
-      entering: {
-        opacity: 0,
-      },
-      entered: {
-        transition: `opacity ${timing}ms ease-in-out`,
-        opacity: 1,
-      },
-      exiting: {
-        transition: `opacity ${timing}ms ease-in-out`,
-        opacity: 0,
-      },
       menuScale : {
-        transition: `all ${timing}ms cubic-bezier(0.075, 0.820, 0.165, 1.000)`
+        transition: `all ${timing}ms cubic-bezier(0.075, 0.820, 0.165, 1.000) ${delay}ms`
+      },
+      crossFade : {
+        transition: `all ${timing}ms cubic-bezier(0.075, 0.820, 0.165, 1.000) ${delay}ms`
       }
     }
   }
   
- export const getTransitionStyle = ({ timing, type }) =>{
-    return getTransitionStyles(timings[timing])[type]
+ export const getTransitionStyle = ({ timing, type, delay }) =>{
+    return getTransitionStyles(timings[timing],timings[delay])[type]
 }
 
 
@@ -88,38 +83,59 @@ export const typeStyles = {
     bp1 : {
       fontFamily:'aktiv-grotesk-extended',
       fontSize :`${msSettings(3)}px`,
+      lineHeight :`${msSettings(3)}px`,
       letterSpacing : `0.05em`,
 
     },
     bp3 : {
       fontFamily:'aktiv-grotesk-extended',
       fontSize :`${msSettings(6)}px`,
+      lineHeight :`${msSettings(6)}px`,
       letterSpacing : `0.05em`,
     }
   },
   heading5 : {
     bp1 : {
       fontFamily:'aktiv-grotesk-extended',
-      fontSize :`${msSettings(0.5)}px`,
+      fontSize :`${msSettings(-1)}px`,
+      lineHeight :`${msSettings(-1)}px`,
       letterSpacing : `0.01em`,
 
     },
     bp3 : {
       fontFamily:'aktiv-grotesk-extended',
       fontSize :`${msSettings(2)}px`,
+      lineHeight :`${msSettings(2)}px`,
       letterSpacing : `0.01em`,
+    }
+  },
+  heading6 : {
+    bp1 : {
+      fontFamily:'PT Mono',
+      fontSize :`${msSettings(-1)}px`,
+      lineHeight :`${msSettings(-1)}px`,
+      letterSpacing : `0.01em`,
+
+    },
+    bp3 : {
+      fontFamily:'PT Mono',
+      fontSize :`${msSettings(-0.5)}px`,
+      lineHeight :`${msSettings(-0.5)}px`,
+      letterSpacing : `0.1em`,
     }
   },
   paragraph1 : {
     bp1 : {
       fontFamily:'aktiv-grotesk-extended',
-      fontSize :`${msSettings(2)}px`,
+      fontSize :`${msSettings(1.5)}px`,
+      lineHeight :`${msSettings(3)}px`,
       letterSpacing : `0.01em`,
 
     },
     bp3 : {
       fontFamily:'aktiv-grotesk-extended',
       fontSize :`${msSettings(3)}px`,
+      lineHeight :`${msSettings(5)}px`,
       letterSpacing : `0.01em`,
     }
   }

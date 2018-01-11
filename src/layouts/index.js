@@ -8,9 +8,10 @@ import styled from 'styled-components';
 import {colours,breakpoints,typeStyles,spacing,getTransitionStyle} from '../DesignSystem';
 
 import Navigation from '../components/Navigation';
+import MenuBar from '../components/MenuBar';
 
-const mapStateToProps = ({ menuOpen }) => {
-  return { menuOpen }
+const mapStateToProps = ({ menuOpen,theme }) => {
+  return { menuOpen,theme }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -62,7 +63,8 @@ class TemplateWrapper extends React.Component {
             `}
           </style>
           </Helmet>
-          <Logo><Link to="/">tbrasington</Link></Logo>
+          <Logo theme={this.props.theme}><Link to="/">tbrasington</Link></Logo>
+          <MenuBarContainer menuOpen={this.props.menuOpen}><MenuBar items={navigationItems} /></MenuBarContainer>
           <NavigationContainer menuOpen={this.props.menuOpen} ><Navigation items={navigationItems}/></NavigationContainer>
           <PageContainer menuOpen={this.props.menuOpen}  transitioning={this.state.exiting}>{children()}</PageContainer>
         </Container>
@@ -81,7 +83,6 @@ position:relative;
 z-index:3;
 padding-top: ${spacing * 2}px;
 padding-left: ${spacing * 2}px;
-color:${colours.white};
 ${typeStyles.heading5.bp1};
 @media (min-width: ${breakpoints.bp3}px) {
   padding-top: ${spacing * 6}px;
@@ -90,8 +91,9 @@ ${typeStyles.heading5.bp1};
 }
 
 a {
-    color:${colours.white};
+    color: ${props=> props.theme==='dark' ? colours.white : colours.black};
     text-decoration:none;
+    ${getTransitionStyle({type : 'crossFade', timing : 't5' })}
 }
 
 `
@@ -117,11 +119,22 @@ z-index:2;
 background: ${colours.grey};
 transform-origin: 150%;
 transform: scale(${props=> props.menuOpen ? 0.5 : 1 });
-${getTransitionStyle({type : 'menuScale', timing : 't3' })}
+${getTransitionStyle({type : 'menuScale', timing : 't3', delay : 't0' })}
 @media (min-width: ${breakpoints.bp3}px) {
   padding:0;
 }
 ${props=> console.log(props)}
+`
+
+const MenuBarContainer = styled.div`
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+height:${spacing*9}px;
+z-index:4;
+transform: translateY(${props=> props.menuOpen ?  `${(spacing*9)}px` : 0});
+${getTransitionStyle({type : 'menuScale', timing : 't5', delay : 't3' })}
 `
 
 export const layoutQuery = graphql`
