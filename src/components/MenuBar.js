@@ -18,10 +18,11 @@ const Container = styled.div`
         ${typeStyles.heading6.bp3};
     }
 
-    a {
+    span, a {
         color:${colours.white};
         text-decoration:none;
         margin: 0 ${spacing*2}px;
+        cursor:pointer;
         @media (min-width: ${breakpoints.bp3}px) {
         }
     }
@@ -31,17 +32,17 @@ const mapStateToProps = ({ menuOpen }) => {
 }
   
 const mapDispatchToProps = dispatch => {
-    return { closeMenu: () => dispatch({ type: `CLOSEMENU`  }) }
+    return { openMenu: () => dispatch({ type: `OPENMENU`  }) }
 }
 
-const  Navigation = ({ items,closeMenu}) => (
+const MenuBar = ({ items,openMenu}) => (
     <Container>
-    <Link to="#">Menu</Link>
+    <span href="#" onClick={openMenu} >Menu</span>
     {items.map((item,i)=>{
-        return <Link key={i} onClick={closeMenu} to={item.url}>{item.label}</Link>
+        return <Link key={i} to={item.url}>{item.label}</Link>
     })}
     </Container>
 );
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default connect(mapStateToProps, mapDispatchToProps)(MenuBar);

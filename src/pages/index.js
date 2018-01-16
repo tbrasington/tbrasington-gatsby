@@ -40,19 +40,23 @@ export default class IndexPage extends React.Component {
 const Container = styled.div`
   ${gridSettings.initGrid.bp1};
 
-  padding-left: ${spacing*3}px;
-  padding-right: ${spacing*3}px;
+  padding-left: ${spacing*4}px;
+  padding-right: ${spacing*4}px;
 
   @media (min-width: ${breakpoints.bp3}px) {
     ${gridSettings.initGrid.bp3};
+    padding-left: ${spacing*6}px;
+    padding-right: ${spacing*6}px;
   }
 `
 
 const About = styled.div`
 ${gridSettings.standardGrid.bp1};
+${gridSettings.standardPageTopPadding.bp1};
 ${typeStyles.paragraph1.bp1};
 @media (min-width: ${breakpoints.bp3}px) {
     ${gridSettings.standardGrid.bp3};
+    ${gridSettings.standardPageTopPadding.bp1};
     ${typeStyles.paragraph1.bp3};
   }
 `

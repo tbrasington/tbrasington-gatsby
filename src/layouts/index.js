@@ -6,9 +6,11 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components';
 
 import {colours,breakpoints,typeStyles,spacing,getTransitionStyle} from '../DesignSystem';
+import Mystic from '../img/mystic'
 
 import Navigation from '../components/Navigation';
 import MenuBar from '../components/MenuBar';
+import { setTimeout } from 'timers';
 
 const mapStateToProps = ({ menuOpen,theme }) => {
   return { menuOpen,theme }
@@ -23,17 +25,30 @@ class TemplateWrapper extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      exiting: false
+      menuOpenDelay : true
     }
-
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.location.key !== nextProps.location.key) {
       this.props.closeMenu()
     }
+    // toggles height of page container so that the scale animation doesnt go skew-iff
+    if(!nextProps.menuOpen) {
+      setTimeout(()=> {
+        this.setState({
+          menuOpenDelay : false
+        })
+      },700)
+    }
+    if(nextProps.menuOpen) {
+      this.setState({
+        menuOpenDelay : true
+      })
+    }
   }
-  componentDidUpdate(){
+  componentDidUpdate(props){
+   
   }
 
   componentWillUpdate(){
@@ -44,7 +59,7 @@ class TemplateWrapper extends React.Component {
     const navigationItems = this.props.data.markdownRemark.frontmatter.links
 
     return (
-        <Container menuOpen={this.props.menuOpen} transitioning={this.state.exiting}>
+        <Container menuOpen={this.props.menuOpen} >
           <Helmet title="Thomas Brasington">
           <script type="text/javascript">{`
           (function(d) {
@@ -66,7 +81,8 @@ class TemplateWrapper extends React.Component {
           <Logo theme={this.props.theme}><Link to="/">tbrasington</Link></Logo>
           <MenuBarContainer menuOpen={this.props.menuOpen}><MenuBar items={navigationItems} /></MenuBarContainer>
           <NavigationContainer menuOpen={this.props.menuOpen} ><Navigation items={navigationItems}/></NavigationContainer>
-          <PageContainer menuOpen={this.props.menuOpen}  transitioning={this.state.exiting}>{children()}</PageContainer>
+          <PageContainer menuOpenDelay={this.state.menuOpenDelay} menuOpen={this.props.menuOpen}>{children()}</PageContainer>
+          <MysticContainer> <Mystic /> </MysticContainer>
         </Container>
       )
     }
@@ -77,6 +93,47 @@ background : ${colours.black};
 min-height:100vh;
 position:relative;
 overflow:${props=> props.menuOpen  ? 'hidden' : 'none' };
+`
+
+const MysticContainer = styled.div`
+width: 100%;
+height: 100%;
+ position:absolute;
+display:flex;
+align-items:center;
+justify-content:center;
+top:0;
+
+svg {
+  position:absolute;
+  width:50%;
+  max-width: 522px;
+  max-height:522px;
+  height:auto;
+  padding-bottom: 50%;
+  top:25%;
+}
+
+.Oval {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: dash 25s ease infinite both alternate;
+  transform: scaleX(-1);
+  transform-origin: center;
+}
+.Oval2 {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: dash 35s ease infinite both alternate;
+  transform: scaleY(-1);
+  transform-origin: center;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 `
 
 const Logo = styled.div`
@@ -114,19 +171,23 @@ padding-left: ${spacing * 2}px;
   padding-left: ${spacing * 6}px;
 }
 `
+
+
 const PageContainer = NavigationContainer.extend`
 padding:0;
 z-index:2;
 background: ${colours.grey};
 transform-origin: 150%;
 transform: scale(${props=> props.menuOpen ? 0.5 : 1 });
-height:${props=> props.menuOpen  ? '60vh' : 'auto' };
-${getTransitionStyle({type : 'menuScale', timing : 't3', delay : 't0' })}
+height:${props=> props.menuOpenDelay  ? '100vh' : 'auto' }; 
+overflow:${props=> props.menuOpen  ? 'hidden' : 'none' };
+${props => getTransitionStyle({type : 'menuScale', timing : 't5', delay :  (props.menuOpen  ? 't2' : 't0' ) })}
 @media (min-width: ${breakpoints.bp3}px) {
   padding:0;
-}
-${props=> console.log(props)}
+} 
 `
+
+
 
 const MenuBarContainer = styled.div`
 position:fixed;
@@ -136,7 +197,7 @@ width:100%;
 height:${spacing*9}px;
 z-index:4;
 transform: translateY(${props=> props.menuOpen ?  `${(spacing*9)}px` : 0});
-${getTransitionStyle({type : 'menuScale', timing : 't5', delay : 't3' })}
+${ props=> getTransitionStyle({type : 'menuScale', timing : 't3', delay :  (props.menuOpen  ? 't0' : 't3' ) })}
 `
 
 export const layoutQuery = graphql`

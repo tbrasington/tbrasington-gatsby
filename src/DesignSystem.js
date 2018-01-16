@@ -9,6 +9,7 @@ export const breakpoints = {
 export const spacing = 8;
 
 export const gridSettings = {
+
 initGrid : {
   bp1 : 
     css`
@@ -36,6 +37,14 @@ initGrid : {
       grid-column-end:12;
 
       `,
+    },
+    standardPageTopPadding : {
+      bp1 : css`
+      padding-top: ${spacing * 9}px;
+      `, 
+      bp3 : css`
+      padding-top: ${spacing * 24}px;
+      `
     }
 }
 
@@ -127,8 +136,8 @@ export const typeStyles = {
   paragraph1 : {
     bp1 : {
       fontFamily:'aktiv-grotesk-extended',
-      fontSize :`${msSettings(1.5)}px`,
-      lineHeight :`${msSettings(3)}px`,
+      fontSize :`${msSettings(-0.9)}px`,
+      lineHeight :`${msSettings(2)}px`,
       letterSpacing : `0.01em`,
 
     },
