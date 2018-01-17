@@ -88,7 +88,23 @@ function  msSettings(value){
 } 
 
 export const typeStyles = {
-  heading4 : {
+  heading0 : {
+    bp1 : {
+      fontFamily:'aktiv-grotesk-extended',
+      fontSize :`${msSettings(8)}px`,
+      lineHeight :`${msSettings(9)}px`,
+      letterSpacing : `0.1em`,
+      textTransform : 'uppercase'
+    },
+    bp3 : {
+      fontFamily:'aktiv-grotesk-extended',
+      fontSize :`${msSettings(18)}px`,
+      lineHeight :`${msSettings(14)}px`,
+      letterSpacing : `0.1em`,
+      textTransform : 'uppercase'
+    }
+  },
+    heading4 : {
     bp1 : {
       fontFamily:'aktiv-grotesk-extended',
       fontSize :`${msSettings(3)}px`,

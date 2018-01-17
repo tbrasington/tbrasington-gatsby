@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import {colours,breakpoints,typeStyles,spacing,getTransitionStyle} from '../DesignSystem';
 import Mystic from '../img/mystic'
-
+import LoaderASIC from '../components/LoaderASIC';
 import Navigation from '../components/Navigation';
 import MenuBar from '../components/MenuBar';
 import { setTimeout } from 'timers';
@@ -25,13 +25,15 @@ class TemplateWrapper extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      menuOpenDelay : true
+      menuOpenDelay : true,
+      loading : false
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.location.key !== nextProps.location.key) {
       this.props.closeMenu()
+
     }
     // toggles height of page container so that the scale animation doesnt go skew-iff
     if(!nextProps.menuOpen) {
@@ -78,6 +80,7 @@ class TemplateWrapper extends React.Component {
             `}
           </style>
           </Helmet>
+          {this.state.loading ? <LoaderASIC /> : null}
           <Logo theme={this.props.theme}><Link to="/">tbrasington</Link></Logo>
           <MenuBarContainer menuOpen={this.props.menuOpen}><MenuBar items={navigationItems} /></MenuBarContainer>
           <NavigationContainer menuOpen={this.props.menuOpen} ><Navigation items={navigationItems}/></NavigationContainer>
