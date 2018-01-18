@@ -33,7 +33,6 @@ class TemplateWrapper extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.location.key !== nextProps.location.key) {
       this.props.closeMenu()
-
     }
     // toggles height of page container so that the scale animation doesnt go skew-iff
     if(!nextProps.menuOpen) {

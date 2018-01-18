@@ -1,5 +1,6 @@
 import React , {Component} from 'react';
 import styled from 'styled-components';
+import _ from 'lodash'
 import {typeStyles, colours, spacing,breakpoints} from '../DesignSystem';
 
 const Container = styled.div`
@@ -28,7 +29,6 @@ span {
 }
 
 @media (min-width: ${breakpoints.bp3}px) {
-   
     ${typeStyles.heading0.bp3};
 }
 
@@ -37,18 +37,6 @@ span {
   100% { left: -200%; }
 }
 ` 
-
-
-function shuffle(a) {
-	var x, t, r = new Uint32Array(1);
-	for (var i = 0, c = a.length - 1, m = a.length; i < c; i++, m--) {
-		crypto.getRandomValues(r);
-		x = Math.floor(r / 65536 / 65536 * m) + i;
-		t = a [i], a [i] = a [x], a [x] = t;
-	}
-
-	return a;
-}
 
 const messages = [
     "A system is calling",
@@ -59,13 +47,12 @@ const messages = [
     "this.that.self"
 ]
 
-const message = shuffle(messages)[0];
+const message = _.shuffle(messages)[0];
 
 const LoaderASIC = ({ items,closeMenu}) => (
     <Container>
         <Message><span>{message}</span><span>{message}</span></Message> 
     </Container>
 );
-
 
 export default LoaderASIC;

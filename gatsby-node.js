@@ -91,7 +91,6 @@ exports.createPages = ({  graphql, boundActionCreators }) => {
             }
             if(node.frontmatter.templateKey==='about-page') {
 
-                console.log('aboutpage')
                 createPage({
                     path: node.fields.slug,
                     component: path.resolve(`src/templates/about-page.js`),

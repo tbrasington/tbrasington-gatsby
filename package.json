@@ -9,7 +9,6 @@
     "gatsby-plugin-react-helmet": "^1.0.5",
     "gatsby-plugin-sass": "^1.0.12",
     "gatsby-plugin-sharp": "^1.6.18",
-    "gatsby-plugin-styled-components": "^2.0.4",
     "gatsby-remark-images": "^1.5.18",
     "gatsby-source-filesystem": "^1.5.5",
     "gatsby-transformer-remark": "^1.7.17",
@@ -19,7 +18,8 @@
     "react-redux": "^5.0.6",
     "react-transition-group": "^2.2.1",
     "redux": "^3.7.2",
-    "styled-components": "^2.4.0"
+    "styled-components": "^2.4.0",
+    "lodash": "^4.17.4"
   },
   "keywords": [
     "gatsby"
@@ -39,7 +39,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "lodash": "^4.17.4",
     "lodash-webpack-plugin": "^0.11.4",
     "prettier": "^1.7.4"
   }

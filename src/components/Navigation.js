@@ -31,7 +31,7 @@ const mapDispatchToProps = dispatch => {
     return { closeMenu: () => dispatch({ type: `CLOSEMENU`  }) }
 }
 
-const  Navigation = ({ items,closeMenu}) => (
+const Navigation = ({ items,closeMenu}) => (
     <Container>
     {items.map((item,i)=>{
         return <Link key={i} onClick={closeMenu} to={item.url}>{item.label}</Link>
