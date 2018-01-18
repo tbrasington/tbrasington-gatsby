@@ -9,4 +9,3 @@ links:
   - label: Blog
     url: /blog
 ---
-

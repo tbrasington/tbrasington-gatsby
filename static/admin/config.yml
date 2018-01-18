@@ -29,9 +29,7 @@ collections:
       - {label: "Path", name: "path", widget: "string"}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"} 
-      - label: "Featured Image"
-        name: "hero"
-        widget: "image"
+      - {label: "Featured Image", name: "hero", widget: "image"}
       - {label: "Body", name: "body", widget: "markdown"}
 
   - name: "pages"
@@ -45,18 +43,20 @@ collections:
           - {label: "Path", name: "path", widget: "hidden", default: "/about"}
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Body", name: "body", widget: "markdown"}
-
-  - name: "navbar"
-    label: "Navigation Bar"
+   
+  - name: "config"
+    label: "Configuration"
     files:
-      - file: "src/pages/structure.md"
-        label: "About"
-        name: "about"
+      - file: "src/pages/navigation.md"
+        label: "Navigation Bar"
+        name: "navbar"
         fields:
-        - {label: "Content Type", name: "contentType", widget: "hidden", default: "navigationStructure"}
-        - name: links
-          label: Links
-          widget: list
-          fields:
+          - {label: "Content Type", name: "contentType", widget: "hidden", default: "navigationStructure"}
+          - name: links
+            label: Links
+            widget: list
+            fields:
               - {label: Label, name: label, widget: string}
               - {label: URL, name: url, widget: string}
+
+  
