@@ -1,6 +1,6 @@
 ---
 templateKey: blog-post
-path: universal-rendering-with-react-sketchapp-for-design-systems
+path: /blog/universal-rendering-with-react-sketchapp-for-design-systems
 title: Universal rendering with react-sketchapp for design systems
 date: 2018-01-23T19:11:23.842Z
 description: >-

@@ -43,6 +43,14 @@ collections:
           - {label: "Path", name: "path", widget: "hidden", default: "/about"}
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Body", name: "body", widget: "markdown"}
+      - file: "src/pages/blog/blog.md"
+        label: "Blog"
+        name: "blog"
+        fields:
+          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-page"}
+          - {label: "Path", name: "path", widget: "hidden", default: "/blog"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}
    
   - name: "config"
     label: "Configuration"

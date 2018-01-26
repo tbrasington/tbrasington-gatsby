@@ -25,7 +25,7 @@ class TemplateWrapper extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      menuOpenDelay : true,
+      menuOpenDelay : this.props.menuOpen,
       loading : false
     }
   }
@@ -94,13 +94,13 @@ const Container = styled.div`
 background : ${colours.black};
 min-height:100vh;
 position:relative;
-overflow:${props=> props.menuOpen  ? 'hidden' : 'none' };
+overflow:${props=> props.menuOpen  ? 'hidden' : 'visible' };
 `
 
 const MysticContainer = styled.div`
 width: 100%;
 height: 100%;
- position:absolute;
+position:absolute;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -146,8 +146,8 @@ padding-left: ${spacing * 2}px;
 ${typeStyles.heading5.bp1};
 @media (min-width: ${breakpoints.bp3}px) {
   padding-top: ${spacing * 6}px;
-    padding-left: ${spacing * 6}px;
-    ${typeStyles.heading5.bp3};
+  padding-left: ${spacing * 6}px;
+  ${typeStyles.heading5.bp3};
 }
 
 a {
@@ -174,22 +174,27 @@ padding-left: ${spacing * 2}px;
 }
 `
 
-
-const PageContainer = NavigationContainer.extend`
+const PageContainer = styled.div`
+position:absolute;
+top:0;
+left:0;
+width:100%;
+min-height:100%;
+height:auto;
+height:${props=> props.menuOpenDelay  ? '100vh' : 'auto' }; 
+overflow:${props=> props.menuOpen  ? 'hidden' : 'visible' };
 padding:0;
+padding-bottom: ${spacing*9}px;
 z-index:2;
 background: ${colours.grey};
 transform-origin: 150%;
 transform: scale(${props=> props.menuOpen ? 0.5 : 1 });
-height:${props=> props.menuOpenDelay  ? '100vh' : 'auto' }; 
-overflow:${props=> props.menuOpen  ? 'hidden' : 'none' };
 ${props => getTransitionStyle({type : 'menuScale', timing : 't5', delay :  (props.menuOpen  ? 't2' : 't0' ) })}
 @media (min-width: ${breakpoints.bp3}px) {
   padding:0;
+  padding-bottom: ${spacing*9}px;
 } 
 `
-
-
 
 const MenuBarContainer = styled.div`
 position:fixed;

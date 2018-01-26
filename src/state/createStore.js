@@ -16,7 +16,7 @@ const reducer = (state, action) => {
   return state
 }
 
-const initialState = { menuOpen: true, theme : 'dark' }
+const initialState = { menuOpen: false, theme : 'light' }
 
 const createStore = () => reduxCreateStore(reducer, initialState)
 export default createStore

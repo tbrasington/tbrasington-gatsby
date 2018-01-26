@@ -9,9 +9,9 @@ const Container = styled.div`
     flex-direction:column;
     justify-items:center;
     color:${colours.white};
-    ${typeStyles.heading4.bp1};
+    ${typeStyles.heading1.bp1};
     @media (min-width: ${breakpoints.bp3}px) {
-        ${typeStyles.heading4.bp3};
+        ${typeStyles.heading1.bp3};
     }
 
     a {

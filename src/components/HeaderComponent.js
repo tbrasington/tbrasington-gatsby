@@ -1,0 +1,50 @@
+import React from 'react';
+import styled from 'styled-components'; 
+import {colours,breakpoints,typeStyles,gridSettings,spacing} from '../DesignSystem';
+
+export default class HeaderComponent extends React.Component {
+
+  render() {
+    return (
+        <Container>
+            <Grid>
+                <Title>{this.props.title}</Title>
+            </Grid>
+        </Container>
+    )
+  }
+}
+
+const Container = styled.div`
+position:relative;
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+min-height: 40vh;
+height:auto;
+width:100%;
+color:${colours.white};
+background: ${colours.black};
+}
+`
+
+const Grid = styled.div`
+${gridSettings.initStandardGrid.bp1};
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+@media (min-width: ${breakpoints.bp3}px) {
+${gridSettings.initStandardGrid.bp3};
+}
+`
+
+const Title = styled.h1`
+
+${gridSettings.standardGrid.bp1};
+font-weight:normal;
+${typeStyles.heading1.bp1};
+@media (min-width: ${breakpoints.bp3}px) {
+${gridSettings.standardGrid.bp3};
+${typeStyles.heading1.bp3};
+}
+`

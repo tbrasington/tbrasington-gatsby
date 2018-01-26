@@ -14,17 +14,17 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
     // const genericPages = new Set();
     if (node.internal.type === `MarkdownRemark`) {
 
-        if(node.frontmatter.templateKey==="blog-entry") {
+        if(node.frontmatter.templateKey==="blog-post") {
             // writingPage.add(node);
             const slug = createFilePath({ node, getNode, basePath: `pages` })
             createNodeField({
                 node,
                 name: `slug`,
-                value: (node.frontmatter.path ? node.frontmatter.path : `/blog/${slug}`),
+                value: (node.frontmatter.path ?  node.frontmatter.path  : `/blog/${slug}`),
             });
         }
 
-        if(node.frontmatter.templateKey==="about-page") {
+        if(node.frontmatter.templateKey==="blog-page") {
             // writingPage.add(node);
             const slug = createFilePath({ node, getNode, basePath: `pages` })
             createNodeField({
@@ -75,7 +75,7 @@ exports.createPages = ({  graphql, boundActionCreators }) => {
         
         dataSet.map(({ node },index) => {
 
-            if(node.frontmatter.templateKey==='blog-entry') {
+            if(node.frontmatter.templateKey==='blog-post') {
 
                 entriesSet.add(node);
                 
@@ -89,11 +89,10 @@ exports.createPages = ({  graphql, boundActionCreators }) => {
                     categorySet.add(node.frontmatter.category);
                 } 
             }
-            if(node.frontmatter.templateKey==='about-page') {
-
+            if(node.frontmatter.contentType==='blog-page') {
                 createPage({
                     path: node.fields.slug,
-                    component: path.resolve(`src/templates/about-page.js`),
+                    component: path.resolve(`src/templates/blog.js`),
                     context: {
                         // Data passed to context is available in page queries as GraphQL variables.
                         slug: node.fields.slug,
@@ -113,7 +112,7 @@ exports.createPages = ({  graphql, boundActionCreators }) => {
  
             createPage({
                 path: entry.fields.slug,
-                component: path.resolve(`src/templates/blog-entry.js`),
+                component: path.resolve(`src/templates/blog-post.js`),
                 context: {
                     slug: entry.fields.slug,
                     next,
