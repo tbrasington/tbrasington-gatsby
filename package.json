@@ -9,17 +9,19 @@
     "gatsby-plugin-react-helmet": "^1.0.5",
     "gatsby-plugin-sass": "^1.0.12",
     "gatsby-plugin-sharp": "^1.6.18",
+    "gatsby-remark-component": "^1.1.0",
     "gatsby-remark-images": "^1.5.18",
     "gatsby-source-filesystem": "^1.5.5",
-    "gatsby-transformer-remark": "^1.7.17",
+    "gatsby-transformer-remark": "^1.7.31",
     "gatsby-transformer-sharp": "^1.6.13",
+    "lodash": "^4.17.4",
     "modularscale-js": "^3.0.1",
     "react-load-script": "0.0.6",
     "react-redux": "^5.0.6",
     "react-transition-group": "^2.2.1",
     "redux": "^3.7.2",
-    "styled-components": "^2.4.0",
-    "lodash": "^4.17.4"
+    "rehype-react": "^3.0.2",
+    "styled-components": "^2.4.0"
   },
   "keywords": [
     "gatsby"

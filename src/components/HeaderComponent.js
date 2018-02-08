@@ -20,11 +20,14 @@ position:relative;
 display:flex;
 flex-direction:column;
 justify-content:flex-end;
+margin-bottom: ${spacing*2}px;
 min-height: 40vh;
 height:auto;
 width:100%;
 color:${colours.white};
 background: ${colours.black};
+@media (min-width: ${breakpoints.bp3}px) {
+margin-bottom: ${spacing*4}px;
 }
 `
 
@@ -43,6 +46,9 @@ const Title = styled.h1`
 ${gridSettings.standardGrid.bp1};
 font-weight:normal;
 ${typeStyles.heading1.bp1};
+padding-left: ${spacing * 4}px;
+padding-right: ${spacing * 4}px;
+padding-bottom: ${spacing * 4}px;
 @media (min-width: ${breakpoints.bp3}px) {
 ${gridSettings.standardGrid.bp3};
 ${typeStyles.heading1.bp3};

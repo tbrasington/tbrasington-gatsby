@@ -37,10 +37,25 @@ initStandardGrid : {
       css`
       grid-column-start: 2;
       grid-column-end:12;
-      margin:0;
-
       `,
     },
+    bodyCopyGrid : {
+      bp1 : 
+        css`
+        grid-column-start: 1;
+        grid-column-end:7;
+        margin:0;
+
+        padding-left: ${spacing * 4}px;
+        padding-right: ${spacing * 4}px;
+        padding-bottom: ${spacing * 4}px;
+        `,
+        bp3 : 
+        css`
+        grid-column-start: 3;
+        grid-column-end:11;
+        `,
+      },
     standardPageTopPadding : {
       bp1 : css`
       padding-top: ${spacing * 9}px;
@@ -238,8 +253,8 @@ export const typeStyles = {
   paragraph2 : {
     bp1 : {
       fontFamily:'PT Mono',
-      fontSize :`${msSettings(0.5)}px`,
-      lineHeight :`${msSettings(2)}px`,
+      fontSize :`${msSettings(0)}px`,
+      lineHeight :`${msSettings(3)}px`,
       letterSpacing : `0.01em`,
 
     },

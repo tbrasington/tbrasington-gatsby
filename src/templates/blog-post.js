@@ -1,9 +1,17 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
+import rehypeReact from "rehype-react"
+
 import HeaderComponent from '../components/HeaderComponent'
 
 import {colours,breakpoints,typeStyles, spacing,gridSettings} from '../DesignSystem';
+
+// register components
+const renderAst = new rehypeReact({
+  createElement: React.createElement,
+  components: { "header-component": HeaderComponent },
+}).Compiler
 
 export default class BlogPage extends React.Component {
 
@@ -14,7 +22,7 @@ export default class BlogPage extends React.Component {
         
         <Helmet title={`Blog | ${post.frontmatter.title} `} />
         <HeaderComponent title={post.frontmatter.title} />
-        <Grid dangerouslySetInnerHTML={{ __html: post.html }} />
+        <Grid>{renderAst(post.htmlAst)}</Grid>
       </Container>
       )
   }
@@ -30,21 +38,24 @@ const Container = styled.div`
 `
 
 const Grid = styled.div`
-${gridSettings.initStandardGrid.bp1};
-@media (min-width: ${breakpoints.bp3}px) {
-${gridSettings.initStandardGrid.bp3};
+
+
+> div {
+ width:100%;
 }
 
->h1,h2,h3,h4,h5, p{
-  ${gridSettings.standardGrid.bp1};
-  @media (min-width: ${breakpoints.bp3}px) {
-    ${gridSettings.standardGrid.bp3};
-  }
 
+>div > h1,
+>div > h2,
+>div > h3,
+>div > h4,
+>div > h5,
+>div > p{
+max-width: 1024px;
+margin: 0 auto;
+padding: 0 ${spacing * 4}px;
 }
-> h1 {  
-  
-
+> div > h1 {  
   font-weight:normal;
   ${typeStyles.heading1.bp1};
   @media (min-width: ${breakpoints.bp3}px) {
@@ -52,7 +63,7 @@ ${gridSettings.initStandardGrid.bp3};
   }
 }
 
-> h2 {
+> div > h2 {
   font-weight:normal;
   ${typeStyles.heading2.bp1};
   @media (min-width: ${breakpoints.bp3}px) {
@@ -60,7 +71,7 @@ ${gridSettings.initStandardGrid.bp3};
   }
 }
 
-> h3 {
+> div > h3 {
   font-weight:normal;
   ${typeStyles.heading3.bp1};
   @media (min-width: ${breakpoints.bp3}px) {
@@ -68,7 +79,7 @@ ${gridSettings.initStandardGrid.bp3};
   }
 }
 
-> h4 {
+> div > h4 {
   font-weight:normal;
   ${typeStyles.heading4.bp1};
   @media (min-width: ${breakpoints.bp3}px) {
@@ -76,7 +87,7 @@ ${gridSettings.initStandardGrid.bp3};
   }
 }
 
-> h5 {
+> div > h5 {
   font-weight:normal;
   ${typeStyles.heading5.bp1};
   @media (min-width: ${breakpoints.bp3}px) {
@@ -84,7 +95,7 @@ ${gridSettings.initStandardGrid.bp3};
   }
 }
 
-> p {
+> div > p {
   font-weight:normal;
   color: ${colours.darkGrey};
   ${typeStyles.paragraph2.bp1};
@@ -99,7 +110,7 @@ ${gridSettings.initStandardGrid.bp3};
 export const pageQuery = graphql`
   query BlogPostByPath($path: String!) {
     markdownRemark(frontmatter: { path: { eq: $path } }) {
-      html
+      htmlAst
       frontmatter {
         path
         date(formatString: "MMMM DD, YYYY")
