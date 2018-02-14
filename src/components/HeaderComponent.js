@@ -52,5 +52,7 @@ padding-bottom: ${spacing * 4}px;
 @media (min-width: ${breakpoints.bp3}px) {
 ${gridSettings.standardGrid.bp3};
 ${typeStyles.heading1.bp3};
+padding-left: 0;
+padding-right: 0;
 }
 `

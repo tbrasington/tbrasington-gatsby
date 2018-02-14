@@ -11,6 +11,7 @@ import LoaderASIC from '../components/LoaderASIC';
 import Navigation from '../components/Navigation';
 import MenuBar from '../components/MenuBar';
 import { setTimeout } from 'timers';
+import '../prism.css'
 
 const mapStateToProps = ({ menuOpen,theme }) => {
   return { menuOpen,theme }

@@ -255,14 +255,29 @@ export const typeStyles = {
       fontFamily:'PT Mono',
       fontSize :`${msSettings(0)}px`,
       lineHeight :`${msSettings(3)}px`,
-      letterSpacing : `0.01em`,
+      letterSpacing : `0.05em`,
 
     },
     bp3 : {
       fontFamily:'PT Mono',
       fontSize :`${msSettings(0.5)}px`,
       lineHeight :`${msSettings(3)}px`,
-      letterSpacing : `0.1em`,
+      letterSpacing : `0.05em`,
+    }
+  },
+  paragraph3 : {
+    bp1 : {
+      fontFamily:'PT Mono',
+      fontSize :`${msSettings(-0.8)}px`,
+      lineHeight :`${msSettings(3)}px`,
+      letterSpacing : `0.05em`,
+
+    },
+    bp3 : {
+      fontFamily:'PT Mono',
+      fontSize :`${msSettings(-0.8)}px`,
+      lineHeight :`${msSettings(3)}px`,
+      letterSpacing : `0.05em`,
     }
   },
 }
