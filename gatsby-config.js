@@ -18,6 +18,13 @@ module.exports = {
         name: 'images'
       }
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'img',
+        path: `${__dirname}/static/img`,
+      },
+    },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     {
@@ -25,16 +32,12 @@ module.exports = {
       options: {
         plugins: [
           "gatsby-remark-component",
-          `gatsby-remark-prismjs`,
-          `gatsby-plugin-sharp`,
+          `gatsby-remark-prismjs`,  
           {
-            resolve: `gatsby-remark-images`,
+            resolve: 'gatsby-remark-images',
             options: {
-              // It's important to specify the maxWidth (in pixels) of
-              // the content container as this plugin uses this as the
-              // base for generating different widths of each image.
-              maxWidth: 1920,
-            },
+              linkImagesToOriginal: false
+            }
           }
       ]
       }
