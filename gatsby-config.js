@@ -18,27 +18,21 @@ module.exports = {
         name: 'images'
       }
     },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'img',
-        path: `${__dirname}/static/img`,
-      },
-    },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
+    `gatsby-remark-copy-linked-files`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
           "gatsby-remark-component",
-          `gatsby-remark-prismjs`,  
           {
             resolve: 'gatsby-remark-images',
             options: {
               linkImagesToOriginal: false
             }
           }
+          
       ]
       }
     }
