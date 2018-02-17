@@ -4,7 +4,7 @@ backend:
 
 media_folder: src/pages/assets
 public_folder: ../../assets
-
+public_folder_relative: true
 collections:
   - name: "blog"
     label: "Blog"
