@@ -16,7 +16,6 @@
     "gatsby-source-filesystem": "^1.5.19",
     "gatsby-transformer-remark": "^1.7.32",
     "gatsby-transformer-sharp": "^1.6.19",
-    "lodash": "^4.17.5",
     "modularscale-js": "^3.0.1",
     "react-load-script": "0.0.6",
     "react-redux": "^5.0.6",
@@ -44,6 +43,12 @@
   },
   "devDependencies": {
     "lodash-webpack-plugin": "^0.11.4",
-    "prettier": "^1.7.4"
+    "prettier": "^1.7.4",
+    "babel-runtime": "^6.26.0",
+    "cheerio": "^1.0.0-rc.2",
+    "is-relative-url": "^2.0.0",
+    "lodash": "^4.17.4",
+    "slash": "^1.0.0",
+    "unist-util-select": "^1.5.0"
   }
 }
