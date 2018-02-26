@@ -6,3 +6,5 @@ date: 2018-01-23T19:14:30.468Z
 description: How I plan a complex design system for scale
 ---
 How I plan a complex design system for scale
+
+![](/img/pressure-p.jpg)
