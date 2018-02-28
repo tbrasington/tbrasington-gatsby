@@ -94,6 +94,7 @@ initStandardGrid : {
 export const colours = {
     black : '#000000',
     grey : '#F6F6F6',
+    midGrey: '#9aa2b1',
     darkGrey: '#4A4A4A',
     blue : '#0080FF',
     darkBlue : '#0040ff',
