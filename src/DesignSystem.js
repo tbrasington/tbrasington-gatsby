@@ -92,11 +92,12 @@ initStandardGrid : {
 
 
 export const colours = {
-    black : '#000000',
+    black : '#1C2026',
     grey : '#F6F6F6',
+    midGrey: '#9aa2b1',
     darkGrey: '#4A4A4A',
     blue : '#0080FF',
-    darkBlue : '#0040ff',
+    midBlue : '#0040ff',
     white : '#fff'
 }
 
@@ -233,6 +234,21 @@ export const typeStyles = {
       fontSize :`${msSettings(-0.5)}px`,
       lineHeight :`${msSettings(-0.5)}px`,
       letterSpacing : `0.1em`,
+    }
+  },
+  label1 : {
+    bp1 : {
+      fontFamily:'aktiv-grotesk-extended',
+      fontSize :`${msSettings(-1)}px`,
+      lineHeight :`${msSettings(-1)}px`,
+      letterSpacing : `0.01em`,
+
+    },
+    bp3 : {
+      fontFamily:'aktiv-grotesk-extended',
+      fontSize :`${msSettings(-0.5)}px`,
+      lineHeight :`${msSettings(-0.5)}px`,
+      letterSpacing : `0.01em`,
     }
   },
   paragraph1 : {

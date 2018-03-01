@@ -4,19 +4,22 @@ import styled from 'styled-components';
 import rehypeReact from "rehype-react"
 
 import HeaderComponent from '../components/HeaderComponent'
+import FullBleedImage from '../components/FullBleedImage'
 
 import {colours,breakpoints,typeStyles, spacing,gridSettings} from '../DesignSystem';
 
 // register components
 const renderAst = new rehypeReact({
   createElement: React.createElement,
-  components: { "header-component": HeaderComponent },
+  components: { "full-bleed-image": FullBleedImage },
 }).Compiler
 
 export default class BlogPage extends React.Component {
 
   render() {
     const { markdownRemark: post } = this.props.data;
+   // console.log(post.htmlAst)
+   // console.log('foo')
     return (
       <Container>
         
@@ -42,7 +45,6 @@ const Grid = styled.div`
 
 > div {
  width:100%;
-padding: 0 ${spacing * 4}px;
 }
 
 
@@ -58,11 +60,18 @@ padding: 0 ${spacing * 4}px;
 >div > .gatsby-highlight,
 >div > table,
 >div > blockquote,
->div > hr {
+>div > hr,
+.gatsby-resp-image-wrapper {
 max-width: 1024px;
-margin: 0 auto;
 width:100%;
+margin: 0 auto;
+padding: 0 ${spacing * 4}px;
 }
+.gatsby-resp-image-wrapper img {
+width:100%;
+height:auto;
+}
+
 
 > div > h1 {  
   font-weight:normal;
@@ -121,11 +130,16 @@ width:100%;
   }
 }
 
+>div>ul,
+>div > ol {
+  list-style-position: inside;
+}
 >div > hr {
   margin-bottom: ${spacing*3}px;
   border:none;
-  background:${colours.darkGrey};
+  border-bottom:1px solid ${colours.midGrey};
   height:1px;
+  width:25%;
 }
 
 pre {
@@ -143,7 +157,9 @@ pre {
     ${typeStyles.paragraph3.bp3};
   }
 }
-`
+
+
+` 
 
         
 export const pageQuery = graphql`

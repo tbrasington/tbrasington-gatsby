@@ -109,32 +109,36 @@ top:0;
 
 svg {
   position:absolute;
-  width:50%;
+  width:100%;
   max-width: 522px;
   max-height:522px;
   height:auto;
-  padding-bottom: 50%;
-  top:25%;
 }
 
-.Oval {
+ .Oval {
   stroke-dasharray: 2000;
   stroke-dashoffset: 2000;
-  animation: dash 25s ease infinite both alternate;
-  transform: scaleX(-1);
+  animation: dash 65s ease infinite both alternate;
+  transform: rotate(-360deg);
   transform-origin: center;
 }
 .Oval2 {
   stroke-dasharray: 1200;
   stroke-dashoffset: 1200;
-  animation: dash 35s ease infinite both alternate;
-  transform: scaleY(-1);
+  animation: dash1 55s ease infinite both alternate;
+  transform: rotate(360deg);
   transform-origin: center;
-}
+} 
 
 @keyframes dash {
   to {
+    stroke-dashoffset: 1;
+  transform: rotate(360deg) ;
+  }
+}@keyframes dash1 {
+  to {
     stroke-dashoffset: 0;
+  transform: rotate(-360deg)  ;
   }
 }
 `
