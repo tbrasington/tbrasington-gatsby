@@ -18,6 +18,8 @@ export default class BlogPage extends React.Component {
 
   render() {
     const { markdownRemark: post } = this.props.data;
+   // console.log(post.htmlAst)
+   // console.log('foo')
     return (
       <Container>
         

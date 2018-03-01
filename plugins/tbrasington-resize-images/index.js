@@ -25,6 +25,7 @@ module.exports = (
     pathPrefix,
   }
 
+
   const options = _.defaults(pluginOptions, defaults)
 
   // This will only work for markdown syntax image tags
@@ -45,7 +46,7 @@ module.exports = (
       const abspath = path.dirname(parentNode.dir).split('src')
      imagePath = slash(path.resolve(abspath[0] + 'static'+node.url))
       //imagePath =   slash(path.join(abspath+ 'static', node.url))
-      console.log('imagePath ' + imagePath)
+     // console.log('imagePath ' + imagePath)
      }
      else {
       imagePath = slash(path.join(parentNode.dir, node.url))
@@ -65,7 +66,7 @@ module.exports = (
 
     //console.log(imageNode)
     if (!imageNode || !imageNode.absolutePath) {
-      console.log('resolving ' + imagePath)
+    //  console.log('resolving ' + imagePath)
       return resolve()
     }
 

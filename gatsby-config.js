@@ -33,6 +33,7 @@ module.exports = {
       options: {
         plugins: [
           `gatsby-remark-prismjs`,
+          "gatsby-remark-resize-component-images",
           "gatsby-remark-component",
           `gatsby-plugin-sharp`,
         {
