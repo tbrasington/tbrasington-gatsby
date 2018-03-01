@@ -33,7 +33,15 @@ module.exports = {
       options: {
         plugins: [
           `gatsby-remark-prismjs`,
-          "gatsby-remark-resize-component-images",
+          {
+            resolve: `gatsby-remark-resize-component-images`,
+            options: {
+              // It's important to specify the maxWidth (in pixels) of
+              // the content container as this plugin uses this as the
+              // base for generating different widths of each image.
+              maxWidth: 1920
+            }
+          },
           "gatsby-remark-component",
           `gatsby-plugin-sharp`,
         {

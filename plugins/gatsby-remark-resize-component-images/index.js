@@ -1,5 +1,5 @@
 // re work of remark images to suit my needs
-// mainly removing the wrapper tags
+// to handle custom component assets
 
 const select = require(`unist-util-select`)
 const path = require(`path`)
@@ -10,12 +10,6 @@ const Promise = require(`bluebird`)
 const cheerio = require(`cheerio`)
 const slash = require(`slash`)
 
-// If the image is relative (not hosted elsewhere)
-// 1. Find the image file
-// 2. Find the image's size
-// 3. Filter out any responsive image sizes that are greater than the image's width
-// 4. Create the responsive images.
-// 5. Set the html w/ aspect ratio helper.
 module.exports = (
   { files, markdownNode, markdownAST, pathPrefix, getNode, reporter },
   pluginOptions
@@ -25,11 +19,9 @@ module.exports = (
     pathPrefix,
   }
 
-
   const options = _.defaults(pluginOptions, defaults)
   const customAssetNodes = select(markdownAST, `[value*="asset"]`)
- 
-  //console.log(customAssetNodes)
+  
 
   const generateImagesAndUpdateNode = async function(node, resolve) {
 

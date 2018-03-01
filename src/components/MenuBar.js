@@ -12,12 +12,20 @@ const Container = styled.div`
     align-items:center;
     justify-content:center;
     color:${colours.white};
-    background:${colours.blue};
-    ${typeStyles.heading6.bp1};
+    background:${colours.black};
+    box-shadow: 0 -2px 10px 2px rgba(28,32,38,0.5);
+    ${getTransitionStyle({type : 'crossFade', timing : 't5', delay: 't0' })};
+
+    ${typeStyles.heading6.bp3};
     @media (min-width: ${breakpoints.bp3}px) {
         ${typeStyles.heading6.bp3};
     }
 
+    &:hover{
+     box-shadow: 0 -2px 10px 2px rgba(0,64,255,0.25);  
+    }
+
+  
     span, a {
         color:${colours.white};
         text-decoration:none;
@@ -25,7 +33,7 @@ const Container = styled.div`
         cursor:pointer;
         width:auto;
         height:100%;
-        background:${colours.blue};
+        background:${colours.black};
         display:flex;
         justify-content: center;
         flex-direction: column;
@@ -34,12 +42,23 @@ const Container = styled.div`
 
         @media (min-width: ${breakpoints.bp3}px) {
         }
+        
 
         &:hover {
-            background:${colours.darkBlue};
+            background:${colours.midBlue};
             ${getTransitionStyle({type : 'crossFade', timing : 't5', delay: 't0' })}
         }
     }
+
+    span.special {
+        ${typeStyles.label1.bp1};
+        @media (min-width: ${breakpoints.bp3}px) {
+        ${typeStyles.label1.bp3};
+        ${'' /* left : ${spacing*4}px;
+        position:absolute; */}
+        }
+    }
+
 `
 const mapStateToProps = ({ menuOpen }) => {
   return { menuOpen }
@@ -51,7 +70,7 @@ const mapDispatchToProps = dispatch => {
 
 const MenuBar = ({ items,openMenu}) => (
     <Container>
-    <span href="#" onClick={openMenu} >Menu</span>
+    <span className="special" href="#" onClick={openMenu} >menu</span>
     {items.map((item,i)=>{
         return <Link key={i} to={item.url}>{item.label}</Link>
     })}
