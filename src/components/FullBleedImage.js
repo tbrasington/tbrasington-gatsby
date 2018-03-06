@@ -5,6 +5,7 @@ import Asset from './Asset';
 export default class FullBleedImage extends React.Component {
 
   render() {
+<<<<<<< HEAD
     const { comptype, asset, caption, inset, assetsizes, sizedata, videosrc , removebg } = this.props;
     let assetType = comptype || null
     let assetSizes, parsedData
@@ -16,6 +17,11 @@ export default class FullBleedImage extends React.Component {
          parsedData=JSON.parse(decodeURIComponent(sizedata)); 
 
     }
+=======
+    const { asset,caption, inset, assetsizes,sizedata } = this.props;
+    const assetSizes =Object.assign({}, assetsizes.split(','));
+    const parsedData=JSON.parse(decodeURIComponent(sizedata)); 
+>>>>>>> parent of cfb7f56... video player setup
    
     const isInset = (inset !== undefined ? true : false)
     const isCaption = (caption !== undefined  ? true : false)
