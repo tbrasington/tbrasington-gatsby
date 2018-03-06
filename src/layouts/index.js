@@ -29,8 +29,6 @@ class TemplateWrapper extends React.Component {
       menuOpenDelay : this.props.menuOpen,
       loading : false
     }
-
-    this.openPageContainer = this.openPageContainer.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -56,13 +54,6 @@ class TemplateWrapper extends React.Component {
   }
 
   componentWillUpdate(){
-  }
-
-  openPageContainer(){
-
-    if(this.props.menuOpen) {
-      this.props.closeMenu()
-    }
   }
 
   render() {
@@ -93,7 +84,7 @@ class TemplateWrapper extends React.Component {
           <Logo theme={this.props.theme}><Link to="/">tbrasington</Link></Logo>
           <MenuBarContainer menuOpen={this.props.menuOpen}><MenuBar items={navigationItems} /></MenuBarContainer>
           <NavigationContainer menuOpen={this.props.menuOpen} ><Navigation items={navigationItems}/></NavigationContainer>
-          <PageContainer menuOpenDelay={this.state.menuOpenDelay} menuOpen={this.props.menuOpen} onClick={this.openPageContainer.bind(this)}>{children()}</PageContainer>
+          <PageContainer menuOpenDelay={this.state.menuOpenDelay} menuOpen={this.props.menuOpen}>{children()}</PageContainer>
           <MysticContainer> <Mystic /> </MysticContainer>
         </Container>
       )
@@ -204,15 +195,10 @@ background: ${colours.grey};
 transform-origin: 150%;
 transform: scale(${props=> props.menuOpen ? 0.5 : 1 });
 ${props => getTransitionStyle({type : 'menuScale', timing : 't5', delay :  (props.menuOpen  ? 't2' : 't0' ) })}
-cursor :${props=> props.menuOpen  ? 'pointer' : 'default' };
 @media (min-width: ${breakpoints.bp3}px) {
   padding:0;
   padding-bottom: ${spacing*9}px;
 } 
-
-&:hover {
-transform: scale(${props=> props.menuOpen ? 0.52 : 1 });
-}
 `
 
 const MenuBarContainer = styled.div`

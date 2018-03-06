@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components'; 
 import {colours,breakpoints,typeStyles,gridSettings,spacing} from '../DesignSystem';
 import Asset from './Asset';
-import Video from './Video'
 export default class FullBleedImage extends React.Component {
 
   render() {
@@ -14,8 +13,10 @@ export default class FullBleedImage extends React.Component {
     if(assetType==='image') {
 
          assetSizes =Object.assign({}, assetsizes.split(','));
-       
+         parsedData=JSON.parse(decodeURIComponent(sizedata)); 
+
     }
+   
     const isInset = (inset !== undefined ? true : false)
     const isCaption = (caption !== undefined  ? true : false)
     const removeBG = (removebg !== undefined  ? true : false)
@@ -24,8 +25,7 @@ export default class FullBleedImage extends React.Component {
     return (
         <Container removeBG>
             <AssetWrapper inset={isInset}> 
-                {assetType==='image' && <Asset src={assetSizes} sizeData = {parsedData}/>  }
-                {assetType==='video' && <Video src={videoSrc} />  }
+             <Asset src={assetSizes} sizeData = {parsedData}/>  
             </AssetWrapper>
             {isCaption && <Caption>{caption}</Caption>}
         </Container>
@@ -48,10 +48,7 @@ height:auto;
 width:100%;
 ${props=>props.inset ?` max-width: 1024px; ` : ``}
 ${props=>props.inset ?` margin: auto; ` : ``}
-${props=>props.inset ?` padding ${spacing*3}px ${spacing*3}px 0 ;` : ``}
-@media (min-width: ${breakpoints.bp3}px) {
-${props=>props.inset ?` padding ${spacing*6}px ${spacing*6}px 0 ;` : ``}
-}
+${props=>props.inset ?` padding-top ${spacing*6}px;` : ``}
 `
 
 const Caption    = styled.div`
