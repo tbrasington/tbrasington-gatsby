@@ -14,15 +14,15 @@ export default class FullBleedImage extends React.Component {
     if(assetType==='image') {
 
          assetSizes =Object.assign({}, assetsizes.split(','));
+         parsedData=JSON.parse(decodeURIComponent(sizedata)); 
        
     }
     const isInset = (inset !== undefined ? true : false)
     const isCaption = (caption !== undefined  ? true : false)
     const removeBG = (removebg !== undefined  ? true : false)
 
-
     return (
-        <Container removeBG>
+        <Container hideBackground={removeBG}>
             <AssetWrapper inset={isInset}> 
                 {assetType==='image' && <Asset src={assetSizes} sizeData = {parsedData}/>  }
                 {assetType==='video' && <Video src={videoSrc} />  }
@@ -38,7 +38,7 @@ position:relative;
 float:left;
 height:auto;
 width:100%;
-background: ${props => props.removeBG ? 'transparent'  :colours.white};
+background: ${props => (props.hideBackground ? 'transparent'  : colours.white)};
 margin: 0 0 ${spacing*4}px;
 `
 
@@ -48,9 +48,9 @@ height:auto;
 width:100%;
 ${props=>props.inset ?` max-width: 1024px; ` : ``}
 ${props=>props.inset ?` margin: auto; ` : ``}
-${props=>props.inset ?` padding ${spacing*3}px ${spacing*3}px 0 ;` : ``}
+${props=>props.inset ?` padding ${spacing*3}px ${spacing*3}px  ;` : ``}
 @media (min-width: ${breakpoints.bp3}px) {
-${props=>props.inset ?` padding ${spacing*6}px ${spacing*6}px 0 ;` : ``}
+${props=>props.inset ?` padding ${spacing*6}px ${spacing*6}px  ;` : ``}
 }
 `
 
@@ -60,11 +60,12 @@ height:auto;
 float:left;
 width:100%;
 
-padding: ${spacing*6}px;
 text-align:center;
 color:${colours.darkGrey};
 ${typeStyles.heading6.bp1};
+    padding: 0 0 ${spacing*3}px 0;
 @media (min-width: ${breakpoints.bp3}px) {
     ${typeStyles.heading6.bp3};
+    padding: 0 0 ${spacing*6}px 0;
 }
 `
