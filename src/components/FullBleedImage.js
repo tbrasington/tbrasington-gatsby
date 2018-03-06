@@ -6,23 +6,23 @@ import Video from './Video'
 export default class FullBleedImage extends React.Component {
 
   render() {
-    const { comptype, asset, caption, inset, assetsizes, sizedata, videosrc } = this.props;
+    const { comptype, asset, caption, inset, assetsizes, sizedata, videosrc , removebg } = this.props;
     let assetType = comptype || null
     let assetSizes, parsedData
     let videoSrc = videosrc || null;
-    console.log(assetType)
 
     if(assetType==='image') {
 
          assetSizes =Object.assign({}, assetsizes.split(','));
-         parsedData=JSON.parse(decodeURIComponent(sizedata)); 
        
     }
     const isInset = (inset !== undefined ? true : false)
     const isCaption = (caption !== undefined  ? true : false)
+    const removeBG = (removebg !== undefined  ? true : false)
+
 
     return (
-        <Container>
+        <Container removeBG>
             <AssetWrapper inset={isInset}> 
                 {assetType==='image' && <Asset src={assetSizes} sizeData = {parsedData}/>  }
                 {assetType==='video' && <Video src={videoSrc} />  }
@@ -38,7 +38,7 @@ position:relative;
 float:left;
 height:auto;
 width:100%;
-background: ${colours.white};
+background: ${props => props.removeBG ? 'transparent'  :colours.white};
 margin: 0 0 ${spacing*4}px;
 `
 
