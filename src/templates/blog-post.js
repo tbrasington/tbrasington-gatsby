@@ -11,7 +11,10 @@ import {colours,breakpoints,typeStyles, spacing,gridSettings} from '../DesignSys
 // register components
 const renderAst = new rehypeReact({
   createElement: React.createElement,
-  components: { "full-bleed-image": FullBleedImage },
+  components: {
+    "full-bleed-image": FullBleedImage,  
+    "full-bleed-video": FullBleedImage
+},
 }).Compiler
 
 export default class BlogPage extends React.Component {
@@ -130,6 +133,17 @@ height:auto;
   }
 }
 
+> div > blockquote {
+  font-weight:normal;
+  color: ${colours.darkGrey};
+  ${typeStyles.paragraph1.bp1};
+  margin-bottom: ${spacing*3}px;
+  @media (min-width: ${breakpoints.bp3}px) {
+    ${typeStyles.paragraph1.bp3};
+    margin-bottom: ${spacing*3}px;
+  }
+}
+
 >div>ul,
 >div > ol {
   list-style-position: inside;
@@ -175,5 +189,4 @@ export const pageQuery = graphql`
     }
   }
 `;
-
 
