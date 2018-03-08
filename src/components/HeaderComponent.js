@@ -5,10 +5,11 @@ import {colours,breakpoints,typeStyles,gridSettings,spacing} from '../DesignSyst
 export default class HeaderComponent extends React.Component {
 
   render() {
+    const { title, asset} = this.props
     return (
-        <Container>
+        <Container backgroundAsset={asset}>
             <Grid>
-                <Title>{this.props.title}</Title>
+                <Title>{title}</Title>
             </Grid>
         </Container>
     )
@@ -26,6 +27,7 @@ height:auto;
 width:100%;
 color:${colours.white};
 background: ${colours.black};
+background-image:${props => props.backgroundAsset ? `url(${props.backgroundAsset})` : 'none'};
 @media (min-width: ${breakpoints.bp3}px) {
 margin-bottom: ${spacing*4}px;
 }

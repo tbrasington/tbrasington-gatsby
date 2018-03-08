@@ -48,9 +48,9 @@ height:auto;
 width:100%;
 ${props=>props.inset ?` max-width: 1024px; ` : ``}
 ${props=>props.inset ?` margin: auto; ` : ``}
-${props=>props.inset ?` padding ${spacing*3}px ${spacing*3}px  ;` : ``}
+${props=>props.inset ?` padding ${spacing*3}px ${spacing*4}px  ;` : ``}
 @media (min-width: ${breakpoints.bp3}px) {
-${props=>props.inset ?` padding ${spacing*6}px ${spacing*6}px  ;` : ``}
+${props=>props.inset ?` padding ${spacing*6}px ${spacing*4}px  ;` : ``}
 }
 `
 

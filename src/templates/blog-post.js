@@ -27,7 +27,7 @@ export default class BlogPage extends React.Component {
       <Container>
         
         <Helmet title={`Blog | ${post.frontmatter.title} `} />
-        <HeaderComponent title={post.frontmatter.title} />
+        <HeaderComponent title={post.frontmatter.title} asset={post.frontmatter.header} />
         <Grid>{renderAst(post.htmlAst)}</Grid>
       </Container>
       )
@@ -185,6 +185,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         title
         description
+        header
       }
     }
   }

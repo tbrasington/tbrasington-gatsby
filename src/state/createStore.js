@@ -13,6 +13,16 @@ const reducer = (state, action) => {
       theme : 'dark' //light || dark
     })
   }
+  if (action.type === `SET_DARK_THEME`) {
+    return Object.assign({}, state, {
+      theme : 'dark' 
+    })
+  }
+  if (action.type === `SET_LIGHT_THEME`) {
+    return Object.assign({}, state, {
+      theme : 'dark' 
+    })
+  }
   return state
 }
 
