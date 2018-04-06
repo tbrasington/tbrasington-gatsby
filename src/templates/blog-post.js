@@ -34,12 +34,16 @@ const renderAst = new rehypeReact({
     super(props)
 
     let theme = props.data.markdownRemark.frontmatter.theme || 'light'
+    console.log('bp '+theme)
     if(theme==='dark'){
       props.setDarkTheme()
     } else {
       props.setLightTheme()
     }
   }
+  componentWillReceiveProps(nextProps) {
+  }
+  
   render() {
     const { markdownRemark: post } = this.props.data;
    // console.log(post.htmlAst)
@@ -48,7 +52,7 @@ const renderAst = new rehypeReact({
       <Container>
         
         <Helmet title={`Blog | ${post.frontmatter.title} `} />
-        <HeaderComponent theme={this.props.theme} title={post.frontmatter.title} asset={post.frontmatter.header} />
+        <HeaderComponent theme={post.frontmatter.theme} title={post.frontmatter.title} asset={post.frontmatter.header} />
         <Grid>{renderAst(post.htmlAst)}</Grid>
       </Container>
       )
@@ -196,7 +200,7 @@ pre {
 
 ` 
 
-        
+
 export const pageQuery = graphql`
   query BlogPostByPath($path: String!) {
     markdownRemark(frontmatter: { path: { eq: $path } }) {
@@ -212,6 +216,5 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-
+        
 export default connect(mapStateToProps,mapDispatchToProps)(BlogPage);

@@ -5,7 +5,8 @@ import {colours,breakpoints,typeStyles,gridSettings,spacing} from '../DesignSyst
 export default class HeaderComponent extends React.Component {
 
   render() {
-    const { title, asset,theme} = this.props
+    const { title, asset,theme} = this.props;
+    console.log('hc  '+theme)
     return (
         <Container backgroundAsset={asset} theme={theme}>
             <Grid>

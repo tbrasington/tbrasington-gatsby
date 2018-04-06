@@ -5,7 +5,7 @@ title: Setting up for complex design systems
 date: 2018-01-23T19:14:30.468Z
 description: How I plan a complex design system for scale
 header: /img/nyc-header.jpg
-theme: dark
+theme: light
 ---
 How I plan a complex design system for scale
 

@@ -3,15 +3,11 @@ import { createStore as reduxCreateStore } from "redux"
 const reducer = (state, action) => {
   if (action.type === `CLOSEMENU`) {
     return Object.assign({}, state, {
-      menuOpen: false,
-      theme : 'light' //light || dark
-    })
+      menuOpen: false    })
   }
   if (action.type === `OPENMENU`) {
     return Object.assign({}, state, {
-      menuOpen: true,
-      theme : 'dark' //light || dark
-    })
+      menuOpen: true    })
   }
   if (action.type === `SET_DARK_THEME`) {
     return Object.assign({}, state, {
@@ -20,7 +16,7 @@ const reducer = (state, action) => {
   }
   if (action.type === `SET_LIGHT_THEME`) {
     return Object.assign({}, state, {
-      theme : 'dark' 
+      theme : 'light' 
     })
   }
   return state

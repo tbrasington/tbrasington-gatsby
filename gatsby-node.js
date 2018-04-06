@@ -16,7 +16,6 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
 
         if(node.frontmatter.templateKey==="blog-post") {
             // writingPage.add(node);
-            console.log(node)
             const slug = createFilePath({ node, getNode, basePath: `pages` })
             createNodeField({
                 node,
@@ -51,7 +50,6 @@ exports.createPages = ({  graphql, boundActionCreators }) => {
             frontmatter { 
                 title
                 tags
-                category
                 templateKey
             }
               fields {
@@ -86,9 +84,6 @@ exports.createPages = ({  graphql, boundActionCreators }) => {
                     });
                 }
 
-                if (node.frontmatter.category) {
-                    categorySet.add(node.frontmatter.category);
-                } 
             }
             if(node.frontmatter.contentType==='blog-page') {
                 createPage({
@@ -134,17 +129,7 @@ exports.createPages = ({  graphql, boundActionCreators }) => {
                 }
             });
         });
-        
-        const categoryList = Array.from(categorySet);
-        categoryList.forEach(category => {
-            createPage({
-                path: `/category/${_.camelCase(category)}/`,
-                component: path.resolve(`src/templates/category.js`),
-                context: {
-                    category
-                }
-            });
-        });
+
         //
         resolve()
       })

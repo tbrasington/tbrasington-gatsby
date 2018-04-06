@@ -29,7 +29,6 @@ class TemplateWrapper extends React.Component {
       menuOpenDelay : this.props.menuOpen,
       loading : false
     }
-
     this.openPageContainer = this.openPageContainer.bind(this)
   }
 
@@ -50,6 +49,9 @@ class TemplateWrapper extends React.Component {
         menuOpenDelay : true
       })
     }
+
+
+    console.log('logo ' + nextProps.theme)
   }
   componentDidUpdate(props){
    

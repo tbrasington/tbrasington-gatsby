@@ -33,6 +33,7 @@ collections:
     create : true
     fields:
       - {label: "Title", name: "title", widget: "string"}
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-tag"}
       - {label: "Path", name: "path", widget: "string", required: false}
 
   - name: "projects"

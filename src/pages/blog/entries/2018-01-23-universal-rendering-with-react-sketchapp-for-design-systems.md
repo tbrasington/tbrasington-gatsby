@@ -6,6 +6,6 @@ date: 2018-01-23T19:11:23.842Z
 description: >-
   The learnings the team and I had when using react-sketchapp for implementing
   design systems
-theme: light
+theme: dark
 ---
 How we went about it

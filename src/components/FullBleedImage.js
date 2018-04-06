@@ -10,6 +10,7 @@ export default class FullBleedImage extends React.Component {
     let assetType = comptype || null
     let assetSizes, parsedData
     let videoSrc = videosrc || null;
+    console.log(assetType)
 
     if(assetType==='image') {
 
@@ -59,7 +60,6 @@ position:relative;
 height:auto;
 float:left;
 width:100%;
-
 text-align:center;
 color:${colours.darkGrey};
 ${typeStyles.heading6.bp1};
