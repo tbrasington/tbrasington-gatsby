@@ -16,6 +16,7 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
 
         if(node.frontmatter.templateKey==="blog-post") {
             // writingPage.add(node);
+            console.log(node)
             const slug = createFilePath({ node, getNode, basePath: `pages` })
             createNodeField({
                 node,

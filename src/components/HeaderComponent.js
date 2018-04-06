@@ -5,9 +5,9 @@ import {colours,breakpoints,typeStyles,gridSettings,spacing} from '../DesignSyst
 export default class HeaderComponent extends React.Component {
 
   render() {
-    const { title, asset} = this.props
+    const { title, asset,theme} = this.props
     return (
-        <Container backgroundAsset={asset}>
+        <Container backgroundAsset={asset} theme={theme}>
             <Grid>
                 <Title>{title}</Title>
             </Grid>
@@ -25,8 +25,8 @@ margin-bottom: ${spacing*2}px;
 min-height: 40vh;
 height:auto;
 width:100%;
-color:${colours.white};
-background: ${colours.black};
+color:${props => (props.theme ==='dark'  ? colours.white : colours.black)};
+background:${props => (props.theme ==='dark'  ? colours.black : colours.white)};
 background-image:${props => props.backgroundAsset ? `url(${props.backgroundAsset})` : 'none'};
 @media (min-width: ${breakpoints.bp3}px) {
 margin-bottom: ${spacing*4}px;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from "react-redux"
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import rehypeReact from "rehype-react"
@@ -8,6 +9,16 @@ import FullBleedImage from '../components/FullBleedImage'
 
 import {colours,breakpoints,typeStyles, spacing,gridSettings} from '../DesignSystem';
 
+const mapDispatchToProps = dispatch => {
+  return { 
+    setDarkTheme: () => dispatch({ type: `SET_DARK_THEME`  }),
+    setLightTheme: () => dispatch({ type: `SET_LIGHT_THEME`  })
+ }
+}
+
+const mapStateToProps = ({ theme }) => {
+  return { theme }
+}
 // register components
 const renderAst = new rehypeReact({
   createElement: React.createElement,
@@ -17,8 +28,18 @@ const renderAst = new rehypeReact({
 },
 }).Compiler
 
-export default class BlogPage extends React.Component {
+ class BlogPage extends React.Component {
+  constructor(props){
 
+    super(props)
+
+    let theme = props.data.markdownRemark.frontmatter.theme || 'light'
+    if(theme==='dark'){
+      props.setDarkTheme()
+    } else {
+      props.setLightTheme()
+    }
+  }
   render() {
     const { markdownRemark: post } = this.props.data;
    // console.log(post.htmlAst)
@@ -27,7 +48,7 @@ export default class BlogPage extends React.Component {
       <Container>
         
         <Helmet title={`Blog | ${post.frontmatter.title} `} />
-        <HeaderComponent title={post.frontmatter.title} asset={post.frontmatter.header} />
+        <HeaderComponent theme={this.props.theme} title={post.frontmatter.title} asset={post.frontmatter.header} />
         <Grid>{renderAst(post.htmlAst)}</Grid>
       </Container>
       )
@@ -186,9 +207,11 @@ export const pageQuery = graphql`
         title
         description
         header
+        theme
       }
     }
   }
 `;
 
 
+export default connect(mapStateToProps,mapDispatchToProps)(BlogPage);

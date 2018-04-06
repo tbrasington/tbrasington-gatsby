@@ -9,6 +9,7 @@ const Container = styled.div`
     flex-direction:column;
     align-items:flex-start;
     justify-content:flex-end;
+    height:  ${spacing  * 16}px;
     padding : ${spacing  * 2}px;
     background:${colours.white};
     ${typeStyles.heading5.bp1};
@@ -22,6 +23,7 @@ const Container = styled.div`
         ${typeStyles.heading5.bp3};
         padding : ${spacing  * 4}px;
 
+    height:  ${spacing  * 32}px;
         &:before {
             content : ' ';
             padding-bottom: calc(50% -  ${spacing * 4}px);

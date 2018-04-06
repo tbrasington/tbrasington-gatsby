@@ -13,42 +13,46 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post"}
-      - {label: "Path", name: "path", widget: "string"}
+      - {label: "Path", name: "path", widget: "string", required: false}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Body", name: "body", widget: "markdown"} 
-      - {label: "Categories", name: "category", widget: "list", required: false, fields: [{name: "category", label: "Category", widget: "relation", collection: "category", searchFields: [label], valueField: path}] }
-      - {label: "Tags", name: "tags", widget: "list", required: false, fields: [{name: "tag", label: "Tag", widget: "relation", collection: "tags", searchFields: [label], valueField: path}] }
-   
-  - name: "category"
-    label: "Categories"
-    folder: "src/pages/blog/categories"
-    create : true
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Path", name: "path", widget: "string"}
+      - {label: "Description", name: "description", widget: "text", required: false}
+      - label: "Theme"
+        name: "theme"
+        widget: "select"
+        options:
+          - { label: "Light", value: "light" }
+          - { label: "Dark", value: "dark" }
+      - {label: "Body", name: "body", widget: "markdown", required: false} 
+      - {label: "Tags", name: "tags", widget: "relation" , collection: "tags", searchFields: "title", valueField: "slug", required: false}
 
   - name: "tags"
     label: "Tags"
     folder: "src/pages/blog/tags"
+    slug: "{{slug}}"
     create : true
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Path", name: "path", widget: "string"}
+      - {label: "Path", name: "path", widget: "string", required: false}
 
   - name: "projects"
     label: "Projects"
     folder: "src/pages/projects"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{slug}}"
     fields:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "project-entry"}
       - {label: "Path", name: "path", widget: "string"}
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"} 
-      - {label: "Featured Image", name: "hero", widget: "image"}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Description", name: "description", widget: "text", required: false} 
+      - {label: "Featured Image", name: "hero", widget: "image", required: false}
+      - label: "Theme"
+        name: "theme"
+        widget: "select"
+        options:
+          - { label: "Light", value: "light" }
+          - { label: "Dark", value: "dark" }
+      - {label: "Body", name: "body", widget: "markdown", required: false}
 
   - name: "pages"
     label: "Pages"

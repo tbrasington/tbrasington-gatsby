@@ -268,14 +268,14 @@ export const typeStyles = {
   },
   paragraph2 : {
     bp1 : {
-      fontFamily:'PT Mono',
+      fontFamily:'aktiv-grotesk',
       fontSize :`${msSettings(0)}px`,
       lineHeight :`${msSettings(3)}px`,
       letterSpacing : `0.05em`,
 
     },
     bp3 : {
-      fontFamily:'PT Mono',
+      fontFamily:'aktiv-grotesk',
       fontSize :`${msSettings(0.5)}px`,
       lineHeight :`${msSettings(3)}px`,
       letterSpacing : `0.05em`,
