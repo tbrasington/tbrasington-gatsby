@@ -110,6 +110,8 @@ const timings = {
   t5 : 500
 }
 const getTransitionStyles = (timing,delay) => {
+  delay = delay || 0;
+  
     return {
       menuScale : {
         transition: `all ${timing}ms cubic-bezier(0.075, 0.820, 0.165, 1.000) ${delay}ms`

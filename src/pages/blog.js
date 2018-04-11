@@ -1,21 +1,34 @@
 import React, {Fragment} from 'react';
 import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
+import { connect } from "react-redux"
 import styled from 'styled-components'
 import {colours,breakpoints,typeStyles,spacing,gridSettings} from '../DesignSystem';
 
 import TextCard from '../components/TextCard';
 
+const mapDispatchToProps = dispatch => {
+  return { 
+    setLightTheme: () => dispatch({ type: `SET_LIGHT_THEME`  })
+ }
+}
 
-export default class BlogPage extends React.Component {
+const mapStateToProps = ({ theme }) => {
+  return { theme }
+}
+
+        
+class BlogPage extends React.Component {
  
-
+  constructor(props){
+    super(props)
+    this.props.setLightTheme()
+ }
   render() {
+   
     const { data } = this.props;
-
     const posts = this.props.data.entries.edges.filter(entry => entry.node.frontmatter.templateKey==='blog-post');
-
-
+   
     return (
       <Container>
         
@@ -120,3 +133,5 @@ query BlogQueryPage {
   }
 }
 `
+
+export default connect(mapStateToProps,mapDispatchToProps)(BlogPage);

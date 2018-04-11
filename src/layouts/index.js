@@ -17,8 +17,12 @@ const mapStateToProps = ({ menuOpen,theme }) => {
   return { menuOpen,theme }
 }
 
+ 
 const mapDispatchToProps = dispatch => {
-  return { closeMenu: () => dispatch({ type: `CLOSEMENU`  }) }
+  return {
+    closeMenu: () => dispatch({ type: `CLOSEMENU`  }),
+    setLightTheme: () => dispatch({ type: `SET_LIGHT_THEME`  })
+  }
 }
 
 class TemplateWrapper extends React.Component {
@@ -29,6 +33,9 @@ class TemplateWrapper extends React.Component {
       menuOpenDelay : this.props.menuOpen,
       loading : false
     }
+    
+    this.props.setLightTheme();
+
     this.openPageContainer = this.openPageContainer.bind(this)
   }
 
@@ -92,7 +99,7 @@ class TemplateWrapper extends React.Component {
           </style>
           </Helmet>
           {this.state.loading ? <LoaderASIC /> : null}
-          <Logo theme={this.props.theme}><Link to="/">tbrasington</Link></Logo>
+          <Logo theme={this.props.menuOpen ? 'dark' : this.props.theme}><Link to="/">tbrasington</Link></Logo>
           <MenuBarContainer menuOpen={this.props.menuOpen}><MenuBar items={navigationItems} /></MenuBarContainer>
           <NavigationContainer menuOpen={this.props.menuOpen} ><Navigation items={navigationItems}/></NavigationContainer>
           <PageContainer menuOpenDelay={this.state.menuOpenDelay} menuOpen={this.props.menuOpen} onClick={this.openPageContainer.bind(this)}>{children()}</PageContainer>
@@ -167,7 +174,7 @@ ${typeStyles.heading5.bp1};
 }
 
 a {
-    color: ${props=> props.theme==='dark' ? colours.white : colours.black};
+    color: ${props=> props.theme==='dark'  ? colours.white : colours.black};
     text-decoration:none;
     ${getTransitionStyle({type : 'crossFade', timing : 't5' })}
 }

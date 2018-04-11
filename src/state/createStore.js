@@ -7,7 +7,8 @@ const reducer = (state, action) => {
   }
   if (action.type === `OPENMENU`) {
     return Object.assign({}, state, {
-      menuOpen: true    })
+      menuOpen: true
+  })
   }
   if (action.type === `SET_DARK_THEME`) {
     return Object.assign({}, state, {

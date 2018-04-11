@@ -40,9 +40,9 @@ const renderAst = new rehypeReact({
     } else {
       props.setLightTheme()
     }
-  }
-  componentWillReceiveProps(nextProps) {
-  }
+ }
+  // componentWillReceiveProps(nextProps) {
+  // }
   
   render() {
     const { markdownRemark: post } = this.props.data;
