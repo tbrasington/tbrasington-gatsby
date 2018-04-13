@@ -6,6 +6,7 @@ import rehypeReact from "rehype-react"
 
 import HeaderComponent from '../components/HeaderComponent'
 import FullBleedImage from '../components/FullBleedImage'
+import GalleryGrid from '../components/GalleryGrid'
 
 import {colours,breakpoints,typeStyles, spacing,gridSettings} from '../DesignSystem';
 
@@ -24,7 +25,8 @@ const renderAst = new rehypeReact({
   createElement: React.createElement,
   components: {
     "full-bleed-image": FullBleedImage,  
-    "full-bleed-video": FullBleedImage
+    "full-bleed-video": FullBleedImage,
+    "gallery-grid" : GalleryGrid
 },
 }).Compiler
 

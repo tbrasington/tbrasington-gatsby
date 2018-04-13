@@ -20,9 +20,9 @@ module.exports = (
   }
 
   const options = _.defaults(pluginOptions, defaults)
-  const customAssetNodes = select(markdownAST, `[value*="asset"]`)
+  let customAssetNodes = select(markdownAST, `[value*="asset"]`)
+  let galleryAssetNodes = select(markdownAST, `[value*="gallerydata"]`)
   
-
   const generateImagesAndUpdateNode = async function(node, resolve) {
 
       var str = node.value;
@@ -31,7 +31,6 @@ module.exports = (
       if(found) {
         const parentNode = getNode(markdownNode.parent)
         const abspath = path.dirname(parentNode.dir).split('src')
-
         const imagePath = slash(path.resolve(abspath[0] + 'static'+found[1]));
 
         const imageNode = _.find(files, file => {
@@ -62,6 +61,29 @@ module.exports = (
     }
   }
 
+   
+  const generateGalleryNodes = async function(node, resolve) {
+
+    var str = node.value;
+    var re = /\gallerydata="(.*?)\"/;
+    var found = str.match(re);
+    if(found) {
+      let stringToJSON = (JSON.parse(found[1]));
+      let data = JSON.parse(stringToJSON)
+      
+      console.log(stringToJSON)
+      console.log('start data set\n\n ')
+       _.each(data, function(item){
+       // console.log(item)
+      })
+   // console.log(found[1])
+      console.log('end data set \n\n')
+      return node.value
+    } else {
+      return resolve();
+    }
+  }
+
   return Promise.all(
     // Simple because there is no nesting in markdown
     customAssetNodes.map(
@@ -69,6 +91,20 @@ module.exports = (
         new Promise(async (resolve, reject) => {
 
           const rawHTML = await generateImagesAndUpdateNode(node, resolve)
+          node.type = `html`
+          node.value = rawHTML;
+
+          return resolve(node);
+        }
+      )
+    ),
+
+    galleryAssetNodes.map(
+      node =>
+        new Promise(async (resolve, reject) => {
+    
+          
+          const rawHTML = await generateGalleryNodes(node, resolve)
           node.type = `html`
           node.value = rawHTML;
 

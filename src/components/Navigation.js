@@ -2,25 +2,32 @@ import React , {Component} from 'react';
 import { connect } from "react-redux"
 import Link from 'gatsby-link'
 import styled from 'styled-components';
-import {typeStyles,colours, spacing,breakpoints} from '../DesignSystem';
+import {typeStyles,colours, spacing,breakpoints,getTransitionStyle} from '../DesignSystem';
 
 const Container = styled.div`
     display:flex;
     flex-direction:column;
     justify-items:center;
-    color:${colours.white};
+    
     ${typeStyles.heading1.bp1};
     @media (min-width: ${breakpoints.bp3}px) {
         ${typeStyles.heading1.bp3};
     }
 
+    :hover a {
+        color: ${colours.midGrey};
+    }
     a {
         margin-bottom: ${spacing}px;
         color:${colours.white};
         text-decoration:none;
-        @media (min-width: ${breakpoints.bp3}px) {
+
             margin-bottom: ${spacing*2}px;
         }
+    }
+
+    a:hover {
+        color:${colours.white};        
     }
 `
 const mapStateToProps = ({ menuOpen }) => {

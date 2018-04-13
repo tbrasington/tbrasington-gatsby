@@ -10,7 +10,7 @@ import Mystic from '../img/mystic'
 import LoaderASIC from '../components/LoaderASIC';
 import Navigation from '../components/Navigation';
 import MenuBar from '../components/MenuBar';
-import { setTimeout } from 'timers';
+//import { setTimeout } from 'timers';
 import '../prism.css'
 
 const mapStateToProps = ({ menuOpen,theme }) => {
@@ -33,7 +33,7 @@ class TemplateWrapper extends React.Component {
       menuOpenDelay : this.props.menuOpen,
       loading : false
     }
-    
+
     this.props.setLightTheme();
 
     this.openPageContainer = this.openPageContainer.bind(this)
@@ -45,11 +45,13 @@ class TemplateWrapper extends React.Component {
     }
     // toggles height of page container so that the scale animation doesnt go skew-iff
     if(!nextProps.menuOpen) {
-      setTimeout(()=> {
+      // time needs to exceed animation to stop the body width becoming larger than 
+      // the viewport
+       setTimeout(()=> {
         this.setState({
           menuOpenDelay : false
-        })
-      },700)
+        })},700)
+      
     }
     if(nextProps.menuOpen) {
       this.setState({
@@ -212,7 +214,7 @@ z-index:2;
 background: ${colours.grey};
 transform-origin: 150%;
 transform: scale(${props=> props.menuOpen ? 0.5 : 1 });
-${props => getTransitionStyle({type : 'menuScale', timing : 't5', delay :  (props.menuOpen  ? 't2' : 't0' ) })}
+${props => getTransitionStyle({type : 'menuScale', timing : 't5'})}
 cursor :${props=> props.menuOpen  ? 'pointer' : 'default' };
 @media (min-width: ${breakpoints.bp3}px) {
   padding:0;
@@ -232,7 +234,7 @@ width:100%;
 height:${spacing*9}px;
 z-index:4;
 transform: translateY(${props=> props.menuOpen ?  `${(spacing*9)}px` : 0});
-${ props=> getTransitionStyle({type : 'menuScale', timing : 't3', delay :  (props.menuOpen  ? 't0' : 't3' ) })}
+${ props=> getTransitionStyle({type : 'menuScale', timing : 't3'})}
 `
 
 export const layoutQuery = graphql`
