@@ -21,8 +21,8 @@ module.exports = (
 
   const options = _.defaults(pluginOptions, defaults)
   let customAssetNodes = select(markdownAST, `[value*="asset"]`)
-  let galleryAssetNodes = select(markdownAST, `[value*="gallerydata"]`)
-  
+  let galleryAssetNodes = select(markdownAST, `[value*="gallerycontent"]`)
+
   const generateImagesAndUpdateNode = async function(node, resolve) {
 
       var str = node.value;
@@ -38,6 +38,11 @@ module.exports = (
             return file.absolutePath === imagePath
           }
         });
+// console.log('imageNodeimageNodeimageNodeimageNode\n\n');
+// console.log(files)
+
+// console.log('=========imageNodeimageNodeimageNodeimageNode-------\n\n');
+
 
         let responsiveSizesResult = await sizes({
           file: imageNode,
@@ -64,18 +69,57 @@ module.exports = (
    
   const generateGalleryNodes = async function(node, resolve) {
 
-    var str = node.value;
-    var re = /\gallerydata="(.*?)\"/;
-    var found = str.match(re);
+    let str = node.value;
+    const re = /gallerycontent='(.*?)'/g
+    let found = str.match(re);
+    console.log('generate gallery nodes \n\n ')
     if(found) {
-      let stringToJSON = (JSON.parse(found[1]));
-      let data = JSON.parse(stringToJSON)
       
-      console.log(stringToJSON)
+     const pattern = /'(.*?)'/g
+     let galleryContentRemoved = found[0].match(pattern);
+     let stringData ='['+ galleryContentRemoved[0].replace(/'/g,'') +']' ;
+
+
+      let data = JSON.parse(stringData)
+ 
       console.log('start data set\n\n ')
-       _.each(data, function(item){
-       // console.log(item)
+      console.log(data)
+
+      const parentNode = getNode(markdownNode.parent)
+      const abspath = path.dirname(parentNode.dir).split('src')
+
+      console.log('parentNode '+parentNode)
+   console.log('abspath '+abspath)
+
+Promise.all(
+      _.each(data, (item)=>{
+
+        new Promise(async (resolve, reject) => {
+        console.log(item)
+        let imagePath = slash(path.resolve(abspath[0] + 'static'+item.src));
+
+        const imageNode = _.find(files, file => {
+          if (file && file.absolutePath) { 
+            return file.absolutePath === imagePath
+          }
+        });
+        console.log(imageNode);
+
+        let responsiveSizesResult =await sizes({
+          file: imageNode,
+          args: options,
+          reporter,
+        })
+
+        console.log(responsiveSizesResult);
+        return resolve(responsiveSizesResult);
       })
+      })    
+      )
+      
+        
+
+
    // console.log(found[1])
       console.log('end data set \n\n')
       return node.value
@@ -103,7 +147,7 @@ module.exports = (
       node =>
         new Promise(async (resolve, reject) => {
     
-          
+          console.log('\nWe have gallery nodes\n\n')
           const rawHTML = await generateGalleryNodes(node, resolve)
           node.type = `html`
           node.value = rawHTML;
