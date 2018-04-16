@@ -211,7 +211,7 @@ overflow:${props=> props.menuOpen  ? 'hidden' : 'visible' };
 padding:0;
 padding-bottom: ${spacing*9}px;
 z-index:2;
-background: ${colours.grey};
+background: ${colours.lightBlue};
 transform-origin: 150%;
 transform: scale(${props=> props.menuOpen ? 0.5 : 1 });
 ${props => getTransitionStyle({type : 'menuScale', timing : 't5'})}
