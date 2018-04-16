@@ -50,13 +50,13 @@ const Container = styled.div`
         }
     }
 
-    ${'' /* span.special {
-        opacity:0.4;
+    span.special {
+        color:${colours.midGrey};
         ${typeStyles.label1.bp1};
         @media (min-width: ${breakpoints.bp3}px) {
         ${typeStyles.label1.bp3};
         }
-    } */}
+    }
 
 `
 const mapStateToProps = ({ menuOpen }) => {
@@ -69,7 +69,7 @@ const mapDispatchToProps = dispatch => {
 
 const MenuBar = ({ items,openMenu}) => (
     <Container>
-    {/* <span className="special" href="#" onClick={openMenu} >menu</span> */}
+    <span className="special" href="#" onClick={openMenu} >menu</span>
     {items.map((item,i)=>{
         return <Link key={i} to={item.url}>{item.label}</Link>
     })}
