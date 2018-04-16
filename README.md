@@ -17,8 +17,7 @@ $ npm run serve
 
 
  ## Custom components
- 
-<gallery-grid gallerycontent='{"src":"/img/bby-v3-concept1.jpg"},{"src":"/img/bby-v3-concept2.jpg"}'></gallery-grid>
+
 
 
 <full-bleed-image  comptype="image" asset="/img/nyc-project-concepts.png"  inset caption="Early concept art"></full-bleed-image>

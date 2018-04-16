@@ -5,18 +5,21 @@ import {colours,breakpoints,typeStyles,gridSettings,spacing} from '../DesignSyst
 export default class GalleryGrid extends React.Component {
 
   render() {
-    //JSON.parse(decodeURIComponent(sizedata)); 
-       
+ 
+    const {cols,rows} = this.props;
+
     return (
-        <Container> 
+        <Container cols={cols} rows={rows} className='grid-container'> 
+        {this.props.children}
         </Container>
     )
   }
 }
 
 const Container = styled.div`
-position:relative;
-float:left;
-height:auto; 
+width:100%;
+display:grid;
+grid-template-columns: repeat(${props=>props.cols}, 1fr);
+grid-gap:${spacing*2}px;
 `
  

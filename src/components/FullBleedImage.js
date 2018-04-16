@@ -6,15 +6,14 @@ import Video from './Video'
 export default class FullBleedImage extends React.Component {
 
   render() {
-    const { comptype, asset, caption, inset, assetsizes, sizedata, videosrc , removebg } = this.props;
+    const { comptype, asset, caption, inset, sizedata, videosrc , removebg } = this.props;
     let assetType = comptype || null
-    let assetSizes, parsedData
+    let parsedData
     let videoSrc = videosrc || null;
  
     if(assetType==='image') {
 
-         assetSizes =Object.assign({}, assetsizes.split(','));
-         parsedData=JSON.parse(decodeURIComponent(sizedata)); 
+          parsedData=JSON.parse(decodeURIComponent(sizedata)); 
        
     }
     const isInset = (inset !== undefined ? true : false)
@@ -24,7 +23,7 @@ export default class FullBleedImage extends React.Component {
     return (
         <Container hideBackground={removeBG}>
             <AssetWrapper inset={isInset}> 
-                {assetType==='image' && <Asset src={assetSizes} sizeData = {parsedData}/>  }
+                {assetType==='image' && <Asset  sizeData = {parsedData}/>  }
                 {assetType==='video' && <Video src={videoSrc} />  }
             </AssetWrapper>
             {isCaption && <Caption>{caption}</Caption>}

@@ -7,6 +7,7 @@ import rehypeReact from "rehype-react"
 import HeaderComponent from '../components/HeaderComponent'
 import FullBleedImage from '../components/FullBleedImage'
 import GalleryGrid from '../components/GalleryGrid'
+import GalleryGridItem from '../components/GalleryGridItem'
 
 import {colours,breakpoints,typeStyles, spacing,gridSettings} from '../DesignSystem';
 
@@ -26,7 +27,8 @@ const renderAst = new rehypeReact({
   components: {
     "full-bleed-image": FullBleedImage,  
     "full-bleed-video": FullBleedImage,
-    "gallery-grid" : GalleryGrid
+    "gallery-grid" : GalleryGrid,
+    "gallery-grid-item" : GalleryGridItem
 },
 }).Compiler
 
@@ -91,7 +93,8 @@ const Grid = styled.div`
 >div > table,
 >div > blockquote,
 >div > hr,
-.gatsby-resp-image-wrapper {
+.gatsby-resp-image-wrapper,
+.grid-container {
 max-width: 1024px;
 width:100%;
 margin: 0 auto;
