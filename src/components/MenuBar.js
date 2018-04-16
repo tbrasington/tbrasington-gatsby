@@ -16,9 +16,9 @@ const Container = styled.div`
     box-shadow: 0 -2px 10px 2px rgba(28,32,38,0.5);
     ${getTransitionStyle({type : 'crossFade', timing : 't5', delay: 't0' })};
 
-    ${typeStyles.heading6.bp3};
+   ${typeStyles.label1.bp1};
     @media (min-width: ${breakpoints.bp3}px) {
-        ${typeStyles.heading6.bp3};
+    ${typeStyles.label1.bp3};
     }
 
     &:hover{
@@ -50,14 +50,13 @@ const Container = styled.div`
         }
     }
 
-    span.special {
+    ${'' /* span.special {
+        opacity:0.4;
         ${typeStyles.label1.bp1};
         @media (min-width: ${breakpoints.bp3}px) {
         ${typeStyles.label1.bp3};
-        ${'' /* left : ${spacing*4}px;
-        position:absolute; */}
         }
-    }
+    } */}
 
 `
 const mapStateToProps = ({ menuOpen }) => {
@@ -70,7 +69,7 @@ const mapDispatchToProps = dispatch => {
 
 const MenuBar = ({ items,openMenu}) => (
     <Container>
-    <span className="special" href="#" onClick={openMenu} >menu</span>
+    {/* <span className="special" href="#" onClick={openMenu} >menu</span> */}
     {items.map((item,i)=>{
         return <Link key={i} to={item.url}>{item.label}</Link>
     })}

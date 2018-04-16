@@ -152,7 +152,8 @@ height:auto;
 }
 > div > ul,
 > div > ol,
-> div > p {
+> div > p,
+.grid-container {
   font-weight:normal;
   color: ${colours.darkGrey};
   ${typeStyles.paragraph2.bp1};

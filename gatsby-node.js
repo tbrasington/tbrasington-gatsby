@@ -108,7 +108,7 @@ exports.createPages = ({  graphql, boundActionCreators }) => {
  
             createPage({
                 path: entry.fields.slug,
-                component: path.resolve(`src/templates/blog-post.js`),
+                component: path.resolve(`src/templates/post.js`),
                 context: {
                     slug: entry.fields.slug,
                     next,
