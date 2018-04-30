@@ -1,11 +1,6 @@
 ---
-contentType: 'navigationStructure'
-path: 'navigation-structure'
-links:
-  - label: Intro
-    url: /
-  - label: Projects
-    url: /projects
-  - label: Blog
-    url: /blog
+sections:
+  - label: Section 1
+  - label: Section 2
 ---
+
