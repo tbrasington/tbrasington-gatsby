@@ -9,3 +9,7 @@ description: >-
 theme: dark
 ---
 How we went about it
+
+
+
+![](/../../assets/cat-srcsrc.jpg)
